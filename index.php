@@ -13,13 +13,57 @@ function encode_string( $string )
 	return $encoded;
 }
 
+function minify_css( $style )
+{
+	// Strips Comments
+	$style = preg_replace( '!/\*.*?\*/!s', '', $style );
+	$style = preg_replace( '/\n\s*\n/', "\n", $style );
+
+	// Minifies
+	$style = preg_replace( '/[\n\r \t]/',' ', $style );
+	$style = preg_replace( '/ +/', ' ', $style );
+	$style = preg_replace( '/ ?([,:;{}]) ?/', '$1', $style );
+
+	return $style;
+}
+
+function minify_js( $code )
+{
+	// remove white spaces
+	$code = preg_replace( '/((?<!\/)\/\*[\s\S]*?\*\/|(?<!\:)\/\/(.*))/', '', $code );
+	$code = preg_replace( "/\n|\r|\t/", "", $code );
+
+	return $code;
+}
+
+// file output
+$file_output = isset( $_GET['output'] ) && 'file' == $_GET['output'];
+
+// start output cache
+if ( $file_output )
+{
+	// set headers
+	header('Content-Encoding: gzip');
+
+	// start buffering
+	ob_start( 'ob_gzhandler' );
+}
+
 ?><!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
 		<title>Nabeel Molham Rosdhy Resume</title>
-		<link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600,700' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="css/resume.css" />
+		<?php
+		// CSS Style
+
+		// fonts 
+		$style = file_get_contents( 'http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600,700' );
+
+		// style
+		$style .= file_get_contents( 'css/resume.css' );
+		?>
+		<style type="text/css"><?php echo minify_css( $style ); ?></style>
 		<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -48,32 +92,33 @@ function encode_string( $string )
 
 				<p>My name is <strong>Nabeel Molham</strong>, a freelance web developer focused on WorPress which I LOVE. I worked with few companies inside and outside Egypt, and I all started at the end of 2003 with Micromedia Flash 5.0 :D.</p>
 
-				<div class="photo"><img src="images/me.jpg" alt="" class="image" /></div>
+				<?php $me_img = 'images/me.jpg'; ?>
+				<div class="photo"><img src="data:<?php echo mime_content_type( $me_img ), ';base64,', base64_encode( file_get_contents( $me_img ) ); ?>" alt="" class="image" /></div>
 
 				<dl class="basic-info">
 					<dt>Name</dt>
 					<dd><strong>Nabeel Molham Rosdhy Adb El-Malek</strong></dd>
-					<ins></ins>
+					<dd class="sep"></dd>
 
 					<dt>Born</dt>
 					<dd>1 March 1988</dd>
-					<ins></ins>
+					<dd class="sep"></dd>
 
 					<dt>Address</dt>
 					<dd><?php echo encode_string( 'Mansoura, Al-Dakahlia, Egypt.' ); ?></dd>
-					<ins></ins>
+					<dd class="sep"></dd>
 
 					<dt>Email</dt>
 					<dd><?php echo encode_string( 'n.molham@gmail.com' ); ?></dd>
-					<ins></ins>
+					<dd class="sep"></dd>
 
 					<dt>Website</dt>
 					<dd><a href="http://nabeel.molham.me/" target="_blank">nabeel.molham.me</a></dd>
-					<ins></ins>
+					<dd class="sep"></dd>
 
 					<dt>Mobile</dt>
 					<dd><?php echo encode_string( '+201007221498' ); ?></dd>
-					<ins></ins>
+					<dd class="sep"></dd>
 
 					</dl><!-- .basic-info -->
 			</div><!-- .wrap -->
@@ -91,7 +136,7 @@ function encode_string( $string )
 
 							<article class="entry">
 								<h3 class="section-title">Training Instructor</h3>
-								<time class="entry-time">Present ( Part-time )</time>
+								<span class="entry-time">Present ( Part-time )</span>
 
 								<div class="entry-content">
 									<p>Web and WordPress development Instructor at <a href="http://www.facebook.com/WorkspaceEG" target="_blank">Workspace</a></p>
@@ -100,7 +145,7 @@ function encode_string( $string )
 
 							<article class="entry">
 								<h3 class="section-title">Freelance Web/WordPress Developer</h3>
-								<time class="entry-time">Present</time>
+								<span class="entry-time">Present</span>
 
 								<div class="entry-content">
 									<p>WordPress development is the best thing I like to do, themes, plugins and deep integrations, also working on other platforms and front-end development.</p>
@@ -129,7 +174,7 @@ function encode_string( $string )
 
 							<article class="entry">
 								<h3 class="section-title">Bachelor of Commerce</h3>
-								<time class="entry-time">2004 - 2011</time>
+								<span class="entry-time">2004 - 2011</span>
 
 								<div class="entry-content">
 									<p>From Mansoura University.</p>
@@ -450,15 +495,15 @@ function encode_string( $string )
 							<?php echo encode_string( 'EL-Tahreer St., El-Galaa St.,' ); ?><br/>
 							<?php echo encode_string( 'Mansoura, Al-Dakahlia, Egypt.' ); ?>
 						</dd>
-						<ins></ins>
+						<dd class="sep"></dd>
 
 						<dt>Mobile:</dt>
 						<dd><?php echo encode_string( '+201007221498' ); ?></dd>
-						<ins></ins>
+						<dd class="sep"></dd>
 
 						<dt>Email:</dt>
 						<dd><a href="mailto:<?php echo encode_string( 'n.molham@gmail.com' ); ?>"><?php echo encode_string( 'n.molham@gmail.com' ); ?></a></dd>
-						<ins></ins>
+						<dd class="sep"></dd>
 					</dl>
 
 					<ul class="social">
@@ -472,7 +517,7 @@ function encode_string( $string )
 				</div><!-- .contact-info -->
 
 				<div class="contact-section contact-form">
-					<form action="" method="post">
+					<form action="#" method="post">
 						<label for="contact-name">Name</label>
 						<p><input type="text" name="name" id="contact-name" /></p>
 
@@ -497,7 +542,31 @@ function encode_string( $string )
 		</footer><!-- #contacts -->
 
 		<!-- Scripts -->
-		<script src="//code.jquery.com/jquery.min.js"></script>
-		<script src="js/script.js"></script>
+		<?php 
+		// jQuery lib
+		$scripts = file_get_contents( 'http://code.jquery.com/jquery.min.js' );
+
+		// resume js
+		$scripts .= minify_js( file_get_contents( 'js/script.js' ) );
+		?>
+		<script><?php echo $scripts; ?></script>
 	</body>
 </html>
+<?php 
+
+// output flush
+if ( $file_output )
+{
+	// get flush
+	$content = ob_get_flush();
+
+	// clean buffer
+	ob_clean();
+
+	// save content
+	file_put_contents( 'resume.html', $content );
+
+	// redirect to result file
+	header( 'location: resume.html' );
+	die();
+}

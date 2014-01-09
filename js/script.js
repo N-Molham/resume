@@ -3,10 +3,11 @@
  */
 ( function( window ) {
 	jQuery( function( $ ) {
-		// inits
+		// header navigation items
 		var $nav = $( '#header .sections-nav ul' ),
-			$body = $( 'body' ),
-			$go_top = $( '#go-top' ),
+			// body element depending of browser engine
+			$body = navigator.userAgent.toLowerCase().indexOf( 'webkit' ) != -1 ? $( 'body' ) : $( 'body, html' ),
+			// scroll speed
 			scroll_speed = 500;
 
 		// loop nav sections
@@ -20,7 +21,6 @@
 			// prevent default
 			e.preventDefault();
 
-			
 			// add selected class
 			$( this ).addClass( 'link-selected' );
 
@@ -53,28 +53,6 @@
 		// scrolling event
 		.on( 'scroll', function() {
 			// check vertical scrolling
-			if ( window.scrollY > 124 ) {
-				// it passed the header
-
-				// show button
-				if ( !$go_top.hasClass( 'visible' ) )
-					$go_top.addClass( 'visible' );
-			} else {
-				// still on header
-
-				// hide button
-				if ( $go_top.hasClass( 'visible' ) )
-					$go_top.removeClass( 'visible' );
-			}
-		} );
-
-		// scroll to top 
-		$go_top.on( 'click', function( e ) {
-			// prevent default
-			e.preventDefault();
-
-			// trigger click the first nav item
-			$nav_links.filter( ':first' ).trigger( 'click' );
 		} );
 	} );
 
