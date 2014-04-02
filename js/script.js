@@ -28,19 +28,7 @@
 		$( '.section[data-nav=true]' ).each( function( index, element ) {
 			// add nav menu item
 			$nav.append( '<li class="item"><a href="#'+ element.id +'" class="link">'+ $( element ).find( '.section-title:eq(0)' ).text() +'</a></li>' );
-		} )
-		// waypoint for handle section visible in viewport event
-		.waypoint( function() {
-			if ( !is_animating ) {
-				var id = $( this ).attr( 'id' );
-				
-				// disable animation for now
-				animate_scroll = false;
-				
-				// trigger navigation item click
-				$nav.find( '.link[href="#'+ id +'"]' ).trigger( 'click' );
-			}
-		}, { offset: '100%' } );
+		} );
 
 		// nav menu items click
 		var $nav_links = $nav.find( '.link' ).on( 'click', function( e ) {
