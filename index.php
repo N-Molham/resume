@@ -546,6 +546,8 @@ if ( $file_output )
 		// jQuery lib
 		$scripts = file_get_contents( 'http://code.jquery.com/jquery.min.js' );
 
+		// waypoint
+		$scripts .= file_get_contents( 'js/waypoints.min.js' );
 		// resume js
 		$scripts .= minify_js( file_get_contents( 'js/script.js' ) );
 		?>
