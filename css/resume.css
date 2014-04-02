@@ -555,6 +555,70 @@ form p {
 	pointer-events: auto;
 }
 
+@media only screen and (max-width: 960px) {
+
+	#header {
+		padding: 16px 0;
+	}
+
+	.section {
+		padding-top: 114px;
+	}
+
+	.wrap {
+		width: 95%;
+	}
+
+	#header .main-head,
+	#header .sections-nav,
+	#about-me .photo,
+	#about-me .basic-info,
+	.more-info .qualifies,
+	.more-info .skills,
+	#contacts .contact-info,
+	#contacts .contact-form {
+		float: none;
+	}
+
+	#header .main-head,
+	#header .sections-nav {
+		text-align: center;
+	}
+
+	#header .sections-nav .item {
+		float: none;
+		display: inline-block;
+	}
+
+	#about-me .photo {
+		margin: 10px auto;
+	}
+
+	#about-me .basic-info {
+		margin: 0;
+		width: 100%;
+	}
+
+	.more-info .qualifies,
+	.more-info .skills {
+		width: 100%;
+	}
+
+	#contacts .contact-info,
+	#contacts .contact-form {
+		width: 100%;
+		margin-top: 10px;
+	}
+
+	input[type=text], 
+	input[type=email], 
+	textarea {
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-o-box-sizing: border-box;
+		width: 100%;
+	}
+}
 
 
 
