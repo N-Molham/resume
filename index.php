@@ -356,6 +356,15 @@ if ( $file_output )
 							<h3 class="section-title">Some of Other Projects</h3>
 
 							<article class="entry">
+								<h3 class="section-title"><a href="http://coingy.com" target="_blank">CoinExchange</a></h3>
+								<strong class="entry-time">Digital Coins Exchanging</strong>
+
+								<div class="entry-content">
+									<p>Wordpress plugin integrated digital coins APIs like Dogecoin, Bitcoin, Litecoin etc</p>
+								</div><!-- .entry-content -->
+							</article><!-- .entry -->
+
+							<article class="entry">
 								<h3 class="section-title"><a href="http://entirej.com" target="_blank">EntireJ API</a></h3>
 								<strong class="entry-time">Customers Support System</strong>
 
@@ -517,15 +526,15 @@ if ( $file_output )
 				</div><!-- .contact-info -->
 
 				<div class="contact-section contact-form">
-					<form action="#" method="post">
+					<form action="#" method="post" data-mail="<?php echo encode_string( 'n.molham@gmail.com' ); ?>">
 						<label for="contact-name">Name</label>
-						<p><input type="text" name="name" id="contact-name" /></p>
+						<p><input type="text" name="name" id="contact-name" required="required" /></p>
 
 						<label for="contact-email">Email</label>
-						<p><input type="email" name="email" id="contact-email" /></p>
+						<p><input type="email" name="email" id="contact-email" required="required" /></p>
 
 						<label for="contact-msg">Message</label>
-						<p><textarea name="msg" id="contact-msg"></textarea></p>
+						<p><textarea name="msg" id="contact-msg" required="required"></textarea></p>
 
 						<input type="submit" id="contact-send" value="Send" />
 					</form>
@@ -564,7 +573,7 @@ if ( $file_output )
 	ob_clean();
 
 	// save content
-	file_put_contents( 'resume.html', $content );
+	file_put_contents( 'index.html', $content );
 
 	// redirect to result file
 	header( 'location: resume.html' );

@@ -1,6 +1,0 @@
-<?php
-/**
- * Mail Response
- */
-
-
