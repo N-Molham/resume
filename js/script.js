@@ -14,21 +14,6 @@
 			// scroll speed
 			scroll_speed = 500;
 
-		// contact form
-		$( '.contact-form form' ).on( 'submit', function( e ) {
-			e.preventDefault();
-			var $this = $( this );
-
-			$.post( 'http://nabeel.molham.me/resume/send.php', $this.serialize(), function( response ) {
-				if ( response == 'ok' ) {
-					$this.find( ':input:not(input[type=submit])' ).val( '' );
-					alert( 'Thanks for your messages, Will come back to you as soon as possible' );
-				} else {
-					alert( response );
-				}
-			} );
-		} );
-
 		// loop nav sections
 		$( '.section[data-nav=true]' ).each( function( index, element ) {
 			// add nav menu item
