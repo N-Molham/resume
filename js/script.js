@@ -18,10 +18,16 @@
 		$( '.section[data-nav=true]' ).each( function( index, element ) {
 			// add nav menu item
 			$nav.append( '<li class="item"><a href="#'+ element.id +'" class="link">'+ $( element ).find( '.section-title:eq(0)' ).text() +'</a></li>' );
-		} );
+		} ).on( 'scrollSpy:enter', function( e ) {
+			// change if not animating
+			if ( !is_animating ) {
+				// mark link as selected
+				$nav.find( '.link' ).removeClass( 'link-selected' ).filter( '[href*='+ e.currentTarget.id +']' ).addClass( 'link-selected' );
+			}
+		} ).scrollSpy();
 
 		// nav menu items click
-		var $nav_links = $nav.find( '.link' ).on( 'click', function( e ) {
+		var $nav_links = $nav.find( '.link' ).on( 'spy-click click', function( e ) {
 			// prevent default
 			e.preventDefault();
 
@@ -30,15 +36,11 @@
 
 			// set URL hash
 			set_hash_no_scroll( e.currentTarget.hash );
-			$window.trigger( 'hashchange' );
+			$window.trigger( 'spy-hashchange' );
 		} );
 
-		// if there are no hash trigger click the first nav item
-		if ( !document.location.hash.length )
-			$nav_links.filter( ':first' ).trigger( 'click' );
-
 		// check init hash
-		$window.on( 'hashchange', function( e ) {
+		$window.on( 'spy-hashchange hashchange', function( e ) {
 			// prevent default
 			e.preventDefault();
 
@@ -64,7 +66,7 @@
 			} 
 		} )
 		// trigger the event on load
-		.trigger( 'hashchange' );
+		.trigger( 'spy-hashchange hashchange' );
 	} );
 
 	// remove hash from location

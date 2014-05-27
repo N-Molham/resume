@@ -658,6 +658,9 @@ if ( $file_output )
 		// jQuery lib
 		$scripts = file_get_contents( 'http://code.jquery.com/jquery.min.js' );
 
+		// scrollspy
+		$scripts .= file_get_contents( 'https://raw.githubusercontent.com/thesmart/jquery-scrollspy/master/scrollspy.js' );
+
 		// resume js
 		$scripts .= minify_js( file_get_contents( 'js/script.js' ) );
 		?>
