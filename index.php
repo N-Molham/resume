@@ -659,7 +659,7 @@ if ( $file_output )
 		$scripts = file_get_contents( 'http://code.jquery.com/jquery.min.js' );
 
 		// scrollspy
-		$scripts .= file_get_contents( 'https://raw.githubusercontent.com/thesmart/jquery-scrollspy/master/scrollspy.js' );
+		$scripts .= minify_js( file_get_contents( 'https://raw.githubusercontent.com/thesmart/jquery-scrollspy/master/scrollspy.js' ) );
 
 		// resume js
 		$scripts .= minify_js( file_get_contents( 'js/script.js' ) );
@@ -682,6 +682,6 @@ if ( $file_output )
 	file_put_contents( 'index.html', $content );
 
 	// redirect to result file
-	header( 'location: resume.html' );
+	header( 'location: index.html' );
 	die();
 }
