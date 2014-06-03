@@ -2,6 +2,9 @@
 // file location absolute path
 $path = dirname( __FILE__ );
 
+// encoding cache
+$GLOBALS['encoding_cache'] = array();
+
 /**
  * Encode passed string to ASCII code
  * 
@@ -10,6 +13,10 @@ $path = dirname( __FILE__ );
  */
 function encode_string( $string )
 {
+	$hash_key = md5( $string );
+	if ( isset( $GLOBALS['encoding_cache'][$hash_key] ) )
+		return $GLOBALS['encoding_cache'][$hash_key];
+
 	$encoded = '';
 	$len = strlen( $string );
 
@@ -18,6 +25,8 @@ function encode_string( $string )
 		$encoded .= "&#" . ord( $string[$i] ) . ';';
 	}
 
+	// cache & return
+	$GLOBALS['encoding_cache'][$hash_key] = $encoded;
 	return $encoded;
 }
 
@@ -83,7 +92,13 @@ if ( $file_output )
 		// style
 		$style .= file_get_contents( $path .'/css/resume.css' );
 		?>
+
+		<!-- Fonts + Main Style -->
 		<style type="text/css"><?php echo minify_css( $style ); ?></style>
+
+		<!-- Print View -->
+		<style rel="stylesheet" type="text/css" media="print"><?php echo minify_css( file_get_contents( $path .'/css/print.css' ) ); ?></style>
+
 		<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -389,7 +404,7 @@ if ( $file_output )
 								<strong class="entry-time">Customers Support System</strong>
 
 								<div class="entry-content">
-									<p>Wordpress plugin integrated with <a href="https://github.com/harvesthq/api" target="_blank">Harvest API</a></p>
+									<p>Wordpress plugin integrated with <a href="http://github.com/harvesthq/api" target="_blank">Harvest API</a></p>
 								</div><!-- .entry-content -->
 							</article><!-- .entry -->
 
@@ -533,6 +548,10 @@ if ( $file_output )
 						<dt>Email:</dt>
 						<dd><a href="mailto:<?php echo encode_string( 'n.molham@gmail.com' ); ?>"><?php echo encode_string( 'n.molham@gmail.com' ); ?></a></dd>
 						<dd class="sep"></dd>
+
+						<dt>C.V.:</dt>
+						<dd><a href="http://nabeel.molham.me/resume/index.html" download="resume.html">Download Resume</a></dd>
+						<dd class="sep"></dd>
 					</dl>
 
 				</div><!-- .contact-info -->
@@ -542,7 +561,7 @@ if ( $file_output )
 
 					<ul class="social-list">
 						<li>
-							<a href="https://github.com/N-Molham" class="social-github" target="_blank">
+							<a href="http://github.com/N-Molham" class="social-github" target="_blank">
 							<svg viewBox="0 0 100 100" class="shape-github">
 								<use xlink:href="#shape-github"></use>
 							</svg>
@@ -594,8 +613,8 @@ if ( $file_output )
 			<div class="wrap">
 				<div class="footer clearfix">
 					<p class="final">Hope you like it &#8730;</p>
-	
-					<a href="https://github.com/N-Molham/resume" class="top" target="_blank">Github</a>
+
+					<a href="http://github.com/N-Molham/resume" class="top" target="_blank">Github</a>
 				</div><!-- .footer -->
 			</div><!-- .wrap -->
 		</footer><!-- #contacts -->
@@ -688,7 +707,6 @@ if ( $file_output )
 	</body>
 </html>
 <?php 
-
 // output flush
 if ( $file_output )
 {

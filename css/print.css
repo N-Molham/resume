@@ -1,0 +1,161 @@
+@CHARSET "UTF-8";
+
+body {
+	margin: 0;
+	padding: 0;
+	line-height: 1.4em !important;
+	word-spacing: 1px !important;
+	letter-spacing: 0.2px !important;
+	font: 14px Arial, Helvetica, "Lucida Grande", serif !important;
+	color: #000 !important;
+	background: #fff;
+}
+
+a:link, 
+a:visited {
+	background: transparent;
+	color: #333;
+	text-decoration: none;
+}
+
+dl {
+	font-size: inherit;
+	font-weight: inherit;
+}
+
+a:link[href^="http://"]:after,
+a[href^="http://"]:visited:after {
+	content: " (" attr(href) ") ";
+	font-size: 11px;
+}
+
+a[href^="http://"] {
+	color: #000;
+}
+
+#header .main-head {
+	color: inherit;
+}
+
+#header,
+.section {
+	background: none !important;
+}
+
+#header {
+	position: static;
+}
+
+.section {
+	padding: 10px 0 20px 0;
+}
+
+#header .sections-nav,
+.section .section-title::before {
+	display: none;
+}
+
+#about-me .photo,
+#header .main-head,
+#contacts .contact-section {
+	float: none;
+}
+
+#about-me .photo {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	-o-border-radius: 0;
+	border-radius: 0;
+	display: inline-block;
+}
+
+#about-me .basic-info, 
+#about-me .photo,
+#contacts .contact-section {
+	margin-top: 20px;
+}
+
+.more-info .knowlage {
+	margin-top: 0;
+}
+
+.more-info .skills .entry .section-title {
+	font-size: inherit;
+}
+
+.more-info .skills .sub-section {
+	margin-bottom: 10px;
+}
+
+.more-info .skills .entry {
+	margin-bottom: 0;
+}
+
+#portfolio {
+	page-break-before: always;
+}
+
+#contacts .contact-section {
+	width: auto;
+}
+
+.social-list {
+	list-style: square;
+}
+
+.social-list li {
+	position: static;
+	display: block;
+	margin-right: 4px;
+	width: auto;
+	height: auto;
+	padding: 4px 0;
+	border: none;
+}
+
+.social-list li > a {
+	position: static;
+	border: none;
+	background: #fff !important;
+	font-weight: normal;
+}
+
+.social-list li > a > svg {
+	display: none;
+}
+
+.social-list li > a > span {
+	font-size: inherit;
+	font-weight: bold;
+	white-space: nowrap;
+	position: static;
+	-webkit-transform: none;
+	-ms-transform: none;
+	transform: none;
+	padding: 0;
+	text-align: left;
+	visibility: visible;
+	z-index: auto;
+}
+
+.social-list li > a > span > span {
+	font-weight: inherit;
+	display: inline;
+	font-size: normal;
+}
+
+.social-list li > a > span::after {
+	display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
