@@ -1,5 +1,13 @@
 <?php 
+// file location absolute path
+$path = dirname( __FILE__ );
 
+/**
+ * Encode passed string to ASCII code
+ * 
+ * @param string $string
+ * @return string
+ */
 function encode_string( $string )
 {
 	$encoded = '';
@@ -13,6 +21,12 @@ function encode_string( $string )
 	return $encoded;
 }
 
+/**
+ * Minify CSS
+ * 
+ * @param string $style
+ * @return string
+ */
 function minify_css( $style )
 {
 	// Strips Comments
@@ -27,6 +41,12 @@ function minify_css( $style )
 	return $style;
 }
 
+/**
+ * Minify Javascript
+ *
+ * @param string $code
+ * @return string
+ */
 function minify_js( $code )
 {
 	// remove white spaces
@@ -61,7 +81,7 @@ if ( $file_output )
 		$style = file_get_contents( 'http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600,700' );
 
 		// style
-		$style .= file_get_contents( 'css/resume.css' );
+		$style .= file_get_contents( $path .'/css/resume.css' );
 		?>
 		<style type="text/css"><?php echo minify_css( $style ); ?></style>
 		<!--[if lt IE 9]>
@@ -92,7 +112,7 @@ if ( $file_output )
 
 				<p>My name is <strong>Nabeel Molham</strong>, a freelance web developer focused on WorPress which I LOVE. I worked with few companies inside and outside Egypt, and I all started at the end of 2003 with Micromedia Flash 5.0 :D.</p>
 
-				<?php $me_img = 'images/me.jpg'; ?>
+				<?php $me_img = $path .'/images/me.jpg'; ?>
 				<div class="photo"><img src="data:<?php echo mime_content_type( $me_img ), ';base64,', base64_encode( file_get_contents( $me_img ) ); ?>" alt="" class="image" /></div>
 
 				<dl class="basic-info">
@@ -659,10 +679,10 @@ if ( $file_output )
 		$scripts = file_get_contents( 'http://code.jquery.com/jquery.min.js' );
 
 		// scrollspy
-		$scripts .= minify_js( file_get_contents( 'https://raw.githubusercontent.com/thesmart/jquery-scrollspy/master/scrollspy.js' ) );
+		$scripts .= file_get_contents( $path .'/js/scrollspy.min.js' );
 
 		// resume js
-		$scripts .= minify_js( file_get_contents( 'js/script.js' ) );
+		$scripts .= minify_js( file_get_contents( $path .'/js/script.js' ) );
 		?>
 		<script><?php echo $scripts; ?></script>
 	</body>
