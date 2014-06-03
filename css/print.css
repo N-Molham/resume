@@ -55,7 +55,6 @@ a[href^="http://"] {
 	display: none;
 }
 
-#about-me .photo,
 #header .main-head,
 #contacts .contact-section {
 	float: none;
