@@ -8,6 +8,24 @@ if ( '' === session_id() )
 	session_start();
 }
 
+// file output
+$file_output = isset( $_GET['output'] ) && 'file' == $_GET['output'];
+$codeable_refresh = isset( $_GET['refresh'] ) && 'yes' == $_GET['refresh'];
+
+if ( !isset( $_SESSION['force_counter'] ) )
+{
+	// prevent many refreshing processes
+	$_SESSION['force_counter'] = 0;
+}
+
+$more_than_enough = $_SESSION['force_counter'] > 5;
+
+if ( false === $more_than_enough && ( $file_output || $codeable_refresh ) )
+{
+	// increase counter
+	$_SESSION['force_counter']++;
+}
+
 // file location absolute path
 $path = dirname( __FILE__ );
 
@@ -18,7 +36,7 @@ $GLOBALS['encoding_cache'] = [];
 $codeable_id = '18791';
 $codeable_url = 'https://api.codeable.io/users/' . $codeable_id;
 
-if ( isset( $_SESSION['codeable_profile'] ) )
+if ( $more_than_enough || ( false === $codeable_refresh && isset( $_SESSION['codeable_profile'] ) ) )
 {
 	// load from cache
 	$codeable_profile = $_SESSION['codeable_profile'];
@@ -30,7 +48,7 @@ else
 	$_SESSION['codeable_profile'] = $codeable_profile;
 }
 
-if ( isset( $_SESSION['codeable_reviews'] ) )
+if ( $more_than_enough || ( false === $codeable_refresh && isset( $_SESSION['codeable_reviews'] ) ) )
 {
 	// load from cache
 	$codeable_reviews = $_SESSION['codeable_reviews'];
@@ -108,11 +126,8 @@ function minify_js( $code )
 	return $code;
 }
 
-// file output
-$file_output = isset( $_GET['output'] ) && 'file' == $_GET['output'];
-
 // start output cache
-if ( $file_output )
+if ( false === $more_than_enough && $file_output )
 {
 	// set headers
 	header( 'Content-Encoding: gzip' );
@@ -444,7 +459,7 @@ if ( $codeable_profile && $codeable_reviews )
 							<div id="codeableBadgeInner">
 								<div id="codeableBadgeProfile">
 									<p id="codeableBadgeButton">
-										<a id="codeableBadgeButtonLink" href="https://app.codeable.io/tasks/new?preferredContractor=<?php echo $codeable_id?>">POST
+										<a id="codeableBadgeButtonLink" href="https://app.codeable.io/tasks/new?preferredContractor=<?php echo $codeable_id ?>">POST
 											YOUR TASK</a>
 									</p>
 								</div>
