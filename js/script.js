@@ -4,7 +4,7 @@
 ( function( window ) {
 	jQuery( function( $ ) {
 		// header navigation items
-		var $nav = $( '#header .sections-nav ul' ),
+		var $nav = $( '#header').find('.sections-nav ul' ),
 			// body element depending of browser engine
 			$body = $( 'html, body' ),
 			$window = $( window ),

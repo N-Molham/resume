@@ -10,8 +10,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -23,7 +23,7 @@ time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -76,6 +76,10 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
 	font-size: 1.6em;
+}
+
+strong {
+	font-weight: bold;
 }
 
 .wrap {
@@ -234,15 +238,15 @@ form p {
 }
 
 .section h2 {
-	font-size: 1.4em;
+	font-size: 1.6em;
 }
 
 .section h3 {
-	font-size: 1.1em;
+	font-size: 1em;
 }
 
 .section h4 {
-	font-size: 0.9em;
+	font-size: 0.8em;
 }
 
 .section .section-title {
@@ -252,6 +256,10 @@ form p {
 .section .section-title::before {
 	content: "+\00a0";
 	display: inline-block;
+}
+
+.sub-section {
+	padding-bottom: 20px;
 }
 
 .section a {
@@ -289,8 +297,12 @@ form p {
 	max-width: 100%;
 }
 
-#contacts {
+#contacts,
+#codeable {
 	background: #16a085;
+}
+
+#contacts {
 	padding-bottom: 0;
 }
 
@@ -319,21 +331,28 @@ form p {
 	box-sizing: border-box;
 }
 
-.social-list li {
-	position: relative;
+.social-list {
+	font-size: 0;
+}
+
+.social-list .social-item-container {
 	display: inline-block;
-	margin-right: 4px;
-	width: 18%;
-	padding-top: 64px;
+	width: 16.66666666666667%;
+	padding: 0 2px;
+}
+
+.social-list .social-item {
+	position: relative;
+	padding-top: 55px;
 	height: 0;
 	border: 5px solid #333;
 }
 
-.social-list li:hover {
+.social-list .social-item:hover {
 	border-color: #222;
 }
 
-.social-list li > a {
+.social-list .social-item > a {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -342,52 +361,55 @@ form p {
 	border: 12px solid transparent;
 }
 
-.social-list li > a.social-twitter {
+.social-list .social-item > a.social-twitter {
 	background: #55acee;
 }
 
-.social-list li > a.social-twitter:hover, 
-.social-list li > a.social-twitter:active {
+.social-list .social-item > a.social-twitter:hover,
+.social-list .social-item > a.social-twitter:active {
 	background: #359ceb;
 }
 
-.social-list li > a.social-facebook {
+.social-list .social-item > a.social-facebook {
 	background: #3b5998;
 }
 
-.social-list li > a.social-facebook:hover, 
-.social-list li > a.social-facebook:active {
+.social-list .social-item > a.social-facebook:hover,
+.social-list .social-item > a.social-facebook:active {
 	background: #314a7e;
 }
 
-.social-list li > a.social-googleplus {
+.social-list .social-item > a.social-googleplus {
 	background: #dd4b39;
 }
 
-.social-list li > a.social-googleplus:hover, 
-.social-list li > a.social-googleplus:active {
+.social-list .social-item > a.social-googleplus:hover,
+.social-list .social-item > a.social-googleplus:active {
 	background: #cf3624;
 }
 
-.social-list li > a.social-youtube {
+.social-list .social-item > a.social-youtube {
 	background: #c4302b;
 }
 
-.social-list li > a.social-youtube:hover, 
-.social-list li > a.social-youtube:active {
+.social-list .social-item > a.social-youtube:hover,
+.social-list .social-item > a.social-youtube:active {
 	background: #a72925;
 }
 
-.social-list li > a.social-github {
+.social-list .social-item > a.social-github,
+.social-list .social-item > a.social-codepen {
 	background: #171515;
 }
 
-.social-list li > a.social-github:hover, 
-.social-list li > a.social-github:active {
+.social-list .social-item > a.social-github:hover,
+.social-list .social-item > a.social-github:active,
+.social-list .social-item > a.social-codepen:hover,
+.social-list .social-item > a.social-codepen:active {
 	background: #040404;
 }
 
-.social-list li > a > svg {
+.social-list .social-item > a > svg {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -401,7 +423,7 @@ form p {
 	transition: 0.3s;
 }
 
-.social-list li > a > span {
+.social-list .social-item > a > span {
 	font-size: 1rem;
 	font-weight: bold;
 	white-space: nowrap;
@@ -412,19 +434,19 @@ form p {
 	-ms-transform: translate(-50%, 0);
 	transform: translate(-50%, 0);
 	background: white;
-	padding: 10px 25px;
+	padding: 10px 18px;
 	text-align: center;
 	visibility: hidden;
 	z-index: 1;
 }
 
-.social-list li > a > span > span {
+.social-list .social-item > a > span > span {
 	font-weight: normal;
 	display: block;
 	font-size: 0.75rem;
 }
 
-.social-list li > a > span::after {
+.social-list .social-item > a > span::after {
 	content: "";
 	position: absolute;
 	bottom: 100%;
@@ -436,8 +458,8 @@ form p {
 	border-bottom: white solid 10px;
 }
 
-.social-list li > a:hover > span, 
-.social-list li > a:active > span {
+.social-list .social-item > a:hover > span,
+.social-list .social-item > a:active > span {
 	visibility: visible;
 }
 
@@ -471,12 +493,14 @@ form p {
 	margin-top: 30px;
 }
 
-.more-info .qualifies {
+.more-info .qualifies,
+.codeable .reviews {
 	float: left;
 	width: 560px;
 }
 
-.more-info .sub-section > .section-title {
+.more-info .sub-section > .section-title,
+.codeable .sub-section > .section-title {
 	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 	padding-bottom: 5px;
 }
@@ -533,11 +557,12 @@ form p {
 	margin-top: 8px;
 }
 
-.more-info .qualifies .entry .entry-content a { 
+.more-info .qualifies .entry .entry-content a {
 	font-weight: bold;
 }
 
-.more-info .skills {
+.more-info .skills,
+.codeable .profile {
 	float: right;
 	width: 300px;
 }
@@ -620,6 +645,93 @@ form p {
 	background: #16a085;
 }
 
+.codeable .profile p {
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+#codeableBadge {
+	width: 100% !important;
+	height: auto !important;
+}
+
+#codeableBadgeInner {
+	width: auto !important;
+	float: none !important;
+}
+
+#contractorImage {
+	float: none !important;
+	margin: 0 auto;
+}
+
+#codeableBadgeProfile {
+	float: none !important;
+	width: auto !important;
+	height: auto !important;
+}
+
+#codeableBadgeButton {
+	position: static !important;
+	bottom: auto !important;
+	margin: 10px 0 0 0 !important;
+	line-height: normal !important;
+}
+
+#codeableBadgeButtonLink {
+	margin: auto !important;
+	display: block;
+}
+
+.codeable-reviews {
+	padding-top: 10px;
+}
+
+.codeable-reviews .project-review {
+	padding-bottom: 2.5rem;
+	font-size: 0.8em;
+}
+
+.codeable-reviews .project-review::after {
+	display: table;
+	content: '';
+	overflow: visible;
+	height: 0;
+	font-size: 0;
+	clear: both;
+}
+
+.codeable-reviews .profile-pic {
+	display: block;
+	float: left;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-o-border-radius: 50%;
+	border-radius: 50%;
+}
+
+.codeable-reviews .review-info {
+	display: block;
+	margin-left: 140px;
+}
+
+.codeable-reviews .rating-star {
+	display: inline-block;
+	width: 17px;
+	height: 16px;
+	background: url("images/codeable-star.svg") center center no-repeat;
+	background-size: contain;
+}
+
+.codeable-reviews .project-title {
+	font-weight: bold;
+}
+
+.codeable-reviews .project-comment {
+	font-style: italic;
+	padding: 8px 0 8px 8px;
+}
+
 #go-top {
 	float: none;
 	position: fixed;
@@ -661,7 +773,8 @@ form p {
 	.more-info .qualifies,
 	.more-info .skills,
 	#contacts .contact-info,
-	#contacts .contact-form {
+	#contacts .contact-form,
+	#contacts .contact-social {
 		float: none;
 	}
 
@@ -690,13 +803,27 @@ form p {
 	}
 
 	#contacts .contact-info,
-	#contacts .contact-form {
+	#contacts .contact-form,
+	#contacts .contact-social {
 		width: 100%;
 		margin-top: 10px;
 	}
 
-	input[type=text], 
-	input[type=email], 
+	#contacts .contact-social {
+		margin-top: 40px;
+	}
+
+	.social-list .social-item-container {
+		width: 33.33333333333333%;
+		padding: 0 10px 10px 10px;
+	}
+
+	.social-list .social-item {
+		padding-top: 80px;
+	}
+
+	input[type=text],
+	input[type=email],
 	textarea {
 		box-sizing: border-box;
 		-moz-box-sizing: border-box;
