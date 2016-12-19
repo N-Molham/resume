@@ -314,16 +314,37 @@ if ( false === $more_than_enough && $file_output )
 					<h3 class="section-title">Web Development</h3>
 
 					<article class="entry">
-						<h4 class="section-title">HTML5 &amp; CSS3</h4>
+						<h4 class="section-title">HTML &amp; CSS</h4>
 						<div class="bar">
 							<div class="percent" style="width:100%;"></div>
 						</div>
 					</article>
 
 					<article class="entry">
-						<h4 class="section-title">JavaScript &amp; jQuery</h4>
+						<h4 class="section-title">SASS</h4>
 						<div class="bar">
-							<div class="percent" style="width:95%;"></div>
+							<div class="percent" style="width:100%;"></div>
+						</div>
+					</article>
+
+					<article class="entry">
+						<h4 class="section-title">JavaScript</h4>
+						<div class="bar">
+							<div class="percent" style="width:100%;"></div>
+						</div>
+					</article>
+
+					<article class="entry">
+						<h4 class="section-title">jQuery</h4>
+						<div class="bar">
+							<div class="percent" style="width:90%;"></div>
+						</div>
+					</article>
+
+					<article class="entry">
+						<h4 class="section-title">React &amp; AngularJS</h4>
+						<div class="bar">
+							<div class="percent" style="width:50%;"></div>
 						</div>
 					</article>
 
@@ -340,23 +361,45 @@ if ( false === $more_than_enough && $file_output )
 							<div class="percent" style="width:100%;"></div>
 						</div>
 					</article>
+				</section>
+
+				<section class="sub-section">
+					<h3 class="section-title">Task Runner</h3>
 
 					<article class="entry">
-						<h4 class="section-title">ASP .NET 3.5</h4>
+						<h4 class="section-title">Grunt</h4>
 						<div class="bar">
-							<div class="percent" style="width:50%;"></div>
+							<div class="percent" style="width:75%;"></div>
 						</div>
 					</article>
 
 					<article class="entry">
-						<h4 class="section-title">ActionScript 3.0</h4>
+						<h4 class="section-title">Gulp</h4>
+						<div class="bar">
+							<div class="percent" style="width:50%;"></div>
+						</div>
+					</article>
+				</section>
+
+				<section class="sub-section bars-green">
+					<h3 class="section-title">Version/Source Control</h3>
+
+					<article class="entry">
+						<h4 class="section-title">Git</h4>
+						<div class="bar">
+							<div class="percent" style="width:75%;"></div>
+						</div>
+					</article>
+
+					<article class="entry">
+						<h4 class="section-title">Mercurial</h4>
 						<div class="bar">
 							<div class="percent" style="width:75%;"></div>
 						</div>
 					</article>
 				</section>
 
-				<section class="sub-section bars-green">
+				<section class="sub-section bars-blue">
 					<h3 class="section-title">Desktop &amp; Mobile</h3>
 
 					<article class="entry">
