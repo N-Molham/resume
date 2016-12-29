@@ -56,7 +56,10 @@ if ( $more_than_enough || ( false === $codeable_refresh && isset( $_SESSION['cod
 else
 {
 	// fetch fresh copy
-	$codeable_reviews             = json_decode( @file_get_contents( $codeable_url . '/reviews' ) );
+	$codeable_reviews = array_merge(
+		json_decode( @file_get_contents( $codeable_url . '/reviews' ) ),
+		json_decode( @file_get_contents( $codeable_url . '/reviews?page=2' ) )
+	);
 	$_SESSION['codeable_reviews'] = $codeable_reviews;
 }
 
