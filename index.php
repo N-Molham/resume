@@ -523,6 +523,14 @@ if ( $codeable_profile && $codeable_reviews )
 							})();
 						</script>
 					</section>
+
+					<section class="sub-section">
+						<h3 class="section-title">Codebale Certificate</h3>
+
+						<a href="https://nabeel.molham.me/blog/codeable-certificate/" target="_blank" title="Codebale Certificate">
+							<img src="https://nabeel.molham.me/blog/wp-content/uploads/2016/03/codeable-certificate-300x212.png" alt="Codebale Certificate" />
+						</a>
+					</section>
 				</div>
 			</div>
 		</div>
