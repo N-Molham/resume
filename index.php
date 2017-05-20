@@ -9,8 +9,8 @@ if ( '' === session_id() )
 }
 
 // file output
-$file_output = isset( $_GET['output'] ) && 'file' == $_GET['output'];
-$codeable_refresh = isset( $_GET['refresh'] ) && 'yes' == $_GET['refresh'];
+$file_output = 'file' === filter_input( INPUT_GET, 'output', FILTER_SANITIZE_STRING );
+$codeable_refresh = 'yes' === filter_input( INPUT_GET, 'refresh', FILTER_SANITIZE_STRING );
 
 if ( !isset( $_SESSION['force_counter'] ) )
 {
@@ -27,7 +27,7 @@ if ( false === $more_than_enough && ( $file_output || $codeable_refresh ) )
 }
 
 // file location absolute path
-$path = dirname( __FILE__ );
+$path = __DIR__;
 
 // encoding cache
 $GLOBALS['encoding_cache'] = [];
@@ -56,7 +56,7 @@ if ( $more_than_enough || ( false === $codeable_refresh && isset( $_SESSION['cod
 else
 {
 	// fetch fresh copy
-	$codeable_reviews = array_merge(
+	$codeable_reviews             = array_merge(
 		json_decode( @file_get_contents( $codeable_url . '/reviews' ) ),
 		json_decode( @file_get_contents( $codeable_url . '/reviews?page=2' ) )
 	);
@@ -72,16 +72,14 @@ else
  */
 function encode_string( $string )
 {
+	$encoded  = '';
 	$hash_key = md5( $string );
 	if ( isset( $GLOBALS['encoding_cache'][ $hash_key ] ) )
 	{
 		return $GLOBALS['encoding_cache'][ $hash_key ];
 	}
 
-	$encoded = '';
-	$len     = strlen( $string );
-
-	for ( $i = 0; $i < $len; $i++ )
+	for ( $i = 0, $len = strlen( $string ); $i < $len; $i++ )
 	{
 		$encoded .= "&#" . ord( $string[ $i ] ) . ';';
 	}
@@ -161,12 +159,9 @@ if ( false === $more_than_enough && $file_output )
 	<style rel="stylesheet" type="text/css" media="print"><?php echo minify_css( file_get_contents( $path . '/css/print.css' ) ); ?></style>
 
 	<!--[if lt IE 9]>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>        <![endif]-->
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>    <![endif]-->
 </head>
 <body>
-
-<!-- Back to Top -->
-<!-- <a href="#top" id="go-top"><img src="images/top-arrow.png" alt="" /> Back to top</a> -->
 
 <!-- Main Header -->
 <header id="header">
@@ -188,7 +183,7 @@ if ( false === $more_than_enough && $file_output )
 		<p>My name is <strong>Nabeel Molham</strong>, a freelance web developer, WordPress Specialist. I worked with few
 			companies inside and outside Egypt, and I all started at the end of 2003 with Micromedia Flash 5.0 :D.</p>
 
-		<?php $me_img = $path . '/images/me.jpg'; ?>
+		<?php $me_img = $path . '/images/avatar_new.jpg'; ?>
 		<div class="photo">
 			<img src="data:<?php echo mime_content_type( $me_img ), ';base64,', base64_encode( file_get_contents( $me_img ) ); ?>" alt="" class="image" />
 		</div>
@@ -233,8 +228,13 @@ if ( false === $more_than_enough && $file_output )
 					<h3 class="section-title">Employment</h3>
 
 					<article class="entry">
-						<h3 class="section-title">Freelance Web/WordPress Developer</h3>
-						<span class="entry-time">Present</span>
+						<h3 class="section-title">WordPress Expert @
+							<a href="https://codeable.io/developers/nabeel-molham/" target="_blank">Codeable.io</a></h3>
+						<span class="entry-time">Dec 2015 : Present</span>
+					</article><!-- .entry -->
+
+					<article class="entry">
+						<h3 class="section-title">Freelance Web Developer, WordPress Specialist</h3>
 
 						<div class="entry-content">
 							<p>WordPress development is the best thing I like to do, themes, plugins and deep
@@ -243,16 +243,18 @@ if ( false === $more_than_enough && $file_output )
 					</article><!-- .entry -->
 
 					<article class="entry">
-						<h3 class="section-title">Training Instructor</h3>
+						<h3 class="section-title">Sr. Web Developer @ <a href="http://jobthemes.com" target="_blank">F-kar
+								Web Designs, Inc</a></h3>
+						<span class="entry-time">Dec 2013 : Oct 2015</span>
 
 						<div class="entry-content">
-							<p>Web and WordPress development Instructor at
-								<a href="http://www.facebook.com/WorkspaceEG" target="_blank">Workspace</a></p>
-						</div><!-- .entry-content -->
+							<p>Working on contract basses.</p>
+						</div>
 					</article><!-- .entry -->
 
 					<article class="entry">
 						<h3 class="section-title">Development Team Leader, Senior Web Developer</h3>
+						<span class="entry-time">Feb 2009 : Dec 2013</span>
 
 						<div class="entry-content">
 							<p>Working at <a href="http://eprisma.com" target="_blank">Eprisma</a> as a Senior at first
@@ -498,7 +500,7 @@ if ( $codeable_profile && $codeable_reviews )
 					<section class="sub-section">
 						<h3 class="section-title">Profile</h3>
 
-						<p><strong><?php echo round( floatval( $codeable_profile->average_rating ), 2 ); ?> / 5</strong>
+						<p><strong><?php echo round( (float) $codeable_profile->average_rating, 2 ); ?> / 5</strong>
 							overall rating so far.</p>
 
 						<div id="codeableBadge" style="display: none;">
@@ -543,78 +545,51 @@ if ( $codeable_profile && $codeable_reviews )
 <section id="portfolio" class="more-info section" data-nav="true">
 	<div class="wrap">
 		<h2 class="section-title">Portfolio</h2>
-		<p>Those are not all my work portfolio as there are many similar ones</p>
+		<p>That is not my full portfolio but these are the ones that standout.</p>
 
 		<div class="knowlage clearfix">
 			<div class="qualifies col">
 				<section class="sub-section other-projects">
-					<h3 class="section-title">Latest Projects</h3>
+					<h3 class="section-title">Projects Highlight</h3>
 
 					<article class="entry">
-						<h3 class="section-title"><a href="http://woothemes.com/woocommerce/" target="_blank">WooCommerce</a>
+						<h3 class="section-title"><a href="https://trueresident.com/" target="_blank">True Resident</a>
 						</h3>
-						<strong class="entry-time">eCommerce</strong>
+						<strong class="entry-time">Points of Interest Listings in Canada</strong>
 
 						<div class="entry-content">
-							<p>Did many plugins and modification for clients are using that solution in creating their
-								online stores.</p>
+							<p>Using listify theme with 3 custom plugins to reach that experience</p>
 						</div><!-- .entry-content -->
 					</article><!-- .entry -->
 
 					<article class="entry">
-						<h3 class="section-title"><a href="http://appthemes.com" target="_blank">AppThemes</a></h3>
-						<strong class="entry-time">WordPress themes</strong>
+						<h3 class="section-title"><a href="https://harvill-ind.com/" target="_blank">Harvill
+								Industries</a></h3>
+						<strong class="entry-time">Manufacturer in USA</strong>
 
 						<div class="entry-content">
-							<p>Did many plugins and modification for clients by AppThemes</p>
+							<p>Using WooCommerce to see and customize order assemblies of their manufactured
+								products</p>
 						</div><!-- .entry-content -->
 					</article><!-- .entry -->
 
 					<article class="entry">
-						<h3 class="section-title"><a href="http://coingy.com" target="_blank">CoinExchange</a></h3>
-						<strong class="entry-time">Digital Coins Exchanging</strong>
+						<h3 class="section-title"><a href="https://haladeen.com/" target="_blank">Haladeen
+								Marketplace</a></h3>
+						<strong class="entry-time">Multi-Vendor marketplace in Asia</strong>
 
 						<div class="entry-content">
-							<p>Wordpress plugin integrated digital coins APIs like Dogecoin, Bitcoin, Litecoin etc</p>
+							<p>Using WooCommerce with multi-vendor integration, customization, subscription based</p>
 						</div><!-- .entry-content -->
 					</article><!-- .entry -->
 
 					<article class="entry">
 						<h3 class="section-title"><a href="http://entirej.com" target="_blank">EntireJ API</a></h3>
-						<strong class="entry-time">Customers Support System</strong>
+						<strong class="entry-time">Customers Support System (Private)</strong>
 
 						<div class="entry-content">
 							<p>Wordpress plugin integrated with
 								<a href="http://github.com/harvesthq/api" target="_blank">Harvest API</a></p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://utmegypt.com" target="_blank">UTM Egypt</a></h3>
-						<strong class="entry-time">Company</strong>
-
-						<div class="entry-content">
-							<p>Colors Painting Company, WordPress theme.</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://orignalegypt.com" target="_blank">Original Egypt</a>
-						</h3>
-						<strong class="entry-time">Company</strong>
-
-						<div class="entry-content">
-							<p>A Juice Company, WordPress theme.</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://hamedabdalla.com" target="_blank">Dr. Hamed Abd
-								Allah</a></h3>
-						<strong class="entry-time">Portfolio</strong>
-
-						<div class="entry-content">
-							<p>Blog, protfolio and patients Q&amp;A, WordPress theme and plugins.</p>
 						</div><!-- .entry-content -->
 					</article><!-- .entry -->
 
@@ -637,82 +612,11 @@ if ( $codeable_profile && $codeable_reviews )
 					</article><!-- .entry -->
 
 					<article class="entry">
-						<h3 class="section-title"><a href="http://chezedy.com" target="_blank">Chezedy</a></h3>
-						<strong class="entry-time">Café</strong>
+						<h3 class="section-title"><a href="http://coingy.com" target="_blank">CoinExchange</a></h3>
+						<strong class="entry-time">Digital Coins Exchanging (Discontinued)</strong>
 
 						<div class="entry-content">
-							<p>Café website, mobile version integrated with no5rog API.</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://sdotmedia.com" target="_blank">Sdot Media</a></h3>
-						<strong class="entry-time">Company</strong>
-
-						<div class="entry-content">
-							<p>Company proftolio, WordPress theme.</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://couranto.com" target="_blank">Couranto</a></h3>
-						<strong class="entry-time">News</strong>
-
-						<div class="entry-content">
-							<p>News website, WordPress theme and plugins.</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://masrena.org.eg" target="_blank">Masrena</a></h3>
-						<strong class="entry-time">Foundation</strong>
-
-						<div class="entry-content">
-							<p>Event site for 25 revolution’s youth made with WordPress. Did the theme developing and
-								layout including plug-ins developing.</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://kets.sd" target="_blank">Kenana Engineering and
-								Technical Services</a></h3>
-						<strong class="entry-time">Company</strong>
-
-						<div class="entry-content">
-							<p>WordPress theme.</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://gangsboss.com" target="_blank">Gangs Boss</a></h3>
-						<strong class="entry-time">Text-based Game</strong>
-
-						<div class="entry-content">
-							<p>Online game continued and completed the exiting project and layout. Was a subproject from
-								elmafia.com.</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://eprisma.com" target="_blank">Eprisma</a></h3>
-						<strong class="entry-time">Company</strong>
-
-						<div class="entry-content">
-							<p>Software solution company web site made with flash platform ( Adobe Flex ).</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-				</section><!-- .other-projects -->
-
-				<section class="sub-section big-projects">
-					<h3 class="section-title">Long-term Big Projects</h3>
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://tveez.me" target="_blank">TVeeZ.me</a></h3>
-						<strong class="entry-time">TV Guide</strong>
-
-						<div class="entry-content">
-							<p>A web and mobile application, WordPress and mobile integration API.</p>
+							<p>Wordpress plugin integrated digital coins APIs like Dogecoin, Bitcoin, Litecoin etc</p>
 						</div><!-- .entry-content -->
 					</article><!-- .entry -->
 
@@ -724,19 +628,7 @@ if ( $codeable_profile && $codeable_reviews )
 							<p>A web and mobile application, WordPress and mobile integration API.</p>
 						</div><!-- .entry-content -->
 					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://elmafia.com" target="_blank">El-Mafia</a></h3>
-						<strong class="entry-time">Test-based Game</strong>
-
-						<div class="entry-content">
-							<p>Online game made from scratch with PHP and MySQL and payment gateways like Facebook,
-								cashU and OneCard. Basic layout based on the client request. Project toke almost a
-								year.</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-				</section><!-- .big-projects -->
+				</section><!-- .other-projects -->
 			</div><!-- .qualifies -->
 		</div><!-- .knowlage -->
 	</div><!-- .wrap -->
@@ -849,7 +741,6 @@ if ( $codeable_profile && $codeable_reviews )
 
 <svg class="social-drawing">
 	<defs>
-
 		<path id="shape-email" d="M44.933,98.093C19.882,92.443,3.579,72.894,6.295,42.843C8.963,13.331,32.181-0.745,54.983,0.03
 				c18.222,0.615,37.405,13.801,38.936,38.896c0.718,11.746-3.373,22.681-9.981,29.42c-8.577,8.746-19.542,10.468-28.546,9.201
 				C41.647,75.631,27.999,66.319,28.748,46.28c0.265-7.127,3.676-14.744,9.178-19.788c3.56-3.269,9.475-5.933,15.366-5.743
@@ -942,7 +833,6 @@ if ( $codeable_profile && $codeable_reviews )
     l15.04-10.058L45.703,67.63V87.672z M50,60.165L34.802,50L50,39.833L65.198,50L50,60.165z M54.297,87.672V67.63L72.927,55.17
     l15.039,10.058L54.297,87.672z M91.405,57.19L80.656,50l10.75-7.191V57.19z" />
 	</defs>
-
 </svg><!-- .social-drawing -->
 
 <!-- Scripts -->
@@ -963,11 +853,8 @@ $scripts .= "\n" . minify_js( file_get_contents( $path . '/js/script.js' ) );
 // output flush
 if ( $file_output )
 {
-	// get flush
-	$content = ob_get_flush();
-
-	// clean buffer
-	ob_clean();
+	// get flush & clean/clear
+	$content = ob_get_clean();
 
 	// save content
 	file_put_contents( 'index.html', $content );
