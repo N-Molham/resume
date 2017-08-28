@@ -228,6 +228,16 @@ if ( false === $more_than_enough && $file_output )
 					<h3 class="section-title">Employment</h3>
 
 					<article class="entry">
+						<h3 class="section-title">Contractor @
+							<a href="https://www.skyverge.com/" target="_blank">SkyVerge - Leading WooCommerce experts</a></h3>
+						<span class="entry-time">Mar 2017 : Present</span>
+
+						<div class="entry-content">
+							<p>Maintaining, developing, and improving their line of well-known WooCommerce extension products.</p>
+						</div><!-- .entry-content -->
+					</article><!-- .entry -->
+
+					<article class="entry">
 						<h3 class="section-title">WordPress Expert @
 							<a href="https://codeable.io/developers/nabeel-molham/" target="_blank">Codeable.io</a></h3>
 						<span class="entry-time">Dec 2015 : Present</span>
@@ -347,6 +357,13 @@ if ( false === $more_than_enough && $file_output )
 					</article>
 
 					<article class="entry">
+						<h4 class="section-title">Vue.js</h4>
+						<div class="bar">
+							<div class="percent" style="width:80%;"></div>
+						</div>
+					</article>
+
+					<article class="entry">
 						<h4 class="section-title">React &amp; AngularJS</h4>
 						<div class="bar">
 							<div class="percent" style="width:50%;"></div>
@@ -361,9 +378,16 @@ if ( false === $more_than_enough && $file_output )
 					</article>
 
 					<article class="entry">
-						<h4 class="section-title">WordPress</h4>
+						<h4 class="section-title">WordPress Development</h4>
 						<div class="bar">
 							<div class="percent" style="width:100%;"></div>
+						</div>
+					</article>
+
+					<article class="entry">
+						<h4 class="section-title">Laravel</h4>
+						<div class="bar">
+							<div class="percent" style="width:80%;"></div>
 						</div>
 					</article>
 				</section>
@@ -540,99 +564,6 @@ if ( $codeable_profile && $codeable_reviews )
 	<?php
 }
 ?>
-
-<!-- Detail info -->
-<section id="portfolio" class="more-info section" data-nav="true">
-	<div class="wrap">
-		<h2 class="section-title">Portfolio</h2>
-		<p>That is not my full portfolio but these are the ones that standout.</p>
-
-		<div class="knowlage clearfix">
-			<div class="qualifies col">
-				<section class="sub-section other-projects">
-					<h3 class="section-title">Projects Highlight</h3>
-
-					<article class="entry">
-						<h3 class="section-title"><a href="https://trueresident.com/" target="_blank">True Resident</a>
-						</h3>
-						<strong class="entry-time">Points of Interest Listings in Canada</strong>
-
-						<div class="entry-content">
-							<p>Using listify theme with 3 custom plugins to reach that experience</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="https://harvill-ind.com/" target="_blank">Harvill
-								Industries</a></h3>
-						<strong class="entry-time">Manufacturer in USA</strong>
-
-						<div class="entry-content">
-							<p>Using WooCommerce to see and customize order assemblies of their manufactured
-								products</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="https://haladeen.com/" target="_blank">Haladeen
-								Marketplace</a></h3>
-						<strong class="entry-time">Multi-Vendor marketplace in Asia</strong>
-
-						<div class="entry-content">
-							<p>Using WooCommerce with multi-vendor integration, customization, subscription based</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://entirej.com" target="_blank">EntireJ API</a></h3>
-						<strong class="entry-time">Customers Support System (Private)</strong>
-
-						<div class="entry-content">
-							<p>Wordpress plugin integrated with
-								<a href="http://github.com/harvesthq/api" target="_blank">Harvest API</a></p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://hanisoliman.com" target="_blank">Hani Soliman</a></h3>
-						<strong class="entry-time">Portfolio</strong>
-
-						<div class="entry-content">
-							<p>Creative Director Portfolio site, WordPress theme and plugins.</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://moddelus.com" target="_blank">Moddelus</a></h3>
-						<strong class="entry-time">Company</strong>
-
-						<div class="entry-content">
-							<p>Models Agents Company, WordPress theme &amp; plugins.</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://coingy.com" target="_blank">CoinExchange</a></h3>
-						<strong class="entry-time">Digital Coins Exchanging (Discontinued)</strong>
-
-						<div class="entry-content">
-							<p>Wordpress plugin integrated digital coins APIs like Dogecoin, Bitcoin, Litecoin etc</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title"><a href="http://no5rog.com" target="_blank">No5rog</a></h3>
-						<strong class="entry-time">Entertainment Guide</strong>
-
-						<div class="entry-content">
-							<p>A web and mobile application, WordPress and mobile integration API.</p>
-						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-				</section><!-- .other-projects -->
-			</div><!-- .qualifies -->
-		</div><!-- .knowlage -->
-	</div><!-- .wrap -->
-</section><!-- #portfolio -->
 
 <!-- Contacts & footer -->
 <footer id="contacts" class="section" data-nav="true">
