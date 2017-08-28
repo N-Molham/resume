@@ -60,6 +60,7 @@ img,
 a img {
 	vertical-align: middle;
 	outline: none;
+	max-width: 100%;
 }
 
 /** CSS RESET **/
@@ -752,8 +753,7 @@ form p {
 	pointer-events: auto;
 }
 
-@media only screen and (max-width: 960px) {
-
+@media (max-width: 992px) {
 	#header {
 		padding: 16px 0;
 	}
@@ -768,10 +768,6 @@ form p {
 
 	#header .main-head,
 	#header .sections-nav,
-	#about-me .photo,
-	#about-me .basic-info,
-	.more-info .qualifies,
-	.more-info .skills,
 	#contacts .contact-info,
 	#contacts .contact-form,
 	#contacts .contact-social {
@@ -789,17 +785,12 @@ form p {
 	}
 
 	#about-me .photo {
-		margin: 10px auto;
+		width: 260px;
+		height: 260px;
 	}
 
 	#about-me .basic-info {
-		margin: 0;
-		width: 100%;
-	}
-
-	.more-info .qualifies,
-	.more-info .skills {
-		width: 100%;
+		width: 420px;
 	}
 
 	#contacts .contact-info,
@@ -814,7 +805,7 @@ form p {
 	}
 
 	.social-list .social-item-container {
-		width: 33.33333333333333%;
+		width: 16.6666666666666%;
 		padding: 0 10px 10px 10px;
 	}
 
@@ -830,11 +821,90 @@ form p {
 		-o-box-sizing: border-box;
 		width: 100%;
 	}
+
+	.more-info .qualifies, .codeable .reviews {
+		width: 420px;
+	}
+
+	.more-info .skills, .codeable .profile {
+		width: 270px;
+	}
 }
 
+@media (max-width: 479px) {
 
+	.section {
+		padding-top: 40px;
+		padding-bottom: 40px;
+	}
 
+	#about-me.section {
+		padding-top: 120px;
+	}
 
+	#header .sections-nav .item .link {
+		padding-right: 0.2em;
+    	padding-left: 0.2em;
+		font-size: 0.7em;
+	}
+
+	#about-me .photo, #about-me .basic-info {
+		float: none;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#about-me .basic-info {
+		width: 90%;
+	}
+
+	dl dt, dl dd {
+		width: auto;
+		float: none;
+	}
+
+	.more-info .qualifies, .codeable .reviews {
+		float: none;
+		width: 100%;
+	}
+
+	.codeable-reviews .profile-pic {
+		width: 90px;
+		height: 90px;
+	}
+
+	.codeable-reviews .review-info {
+		margin-left: 100px;
+	}
+
+	.more-info .skills, .codeable .profile {
+		width: 100%;
+		float: none;
+	}
+
+	.more-info .sub-section > .section-title, .codeable .sub-section > .section-title {
+		margin-bottom: 12px;
+	}
+
+	.codeable .profile .sub-section:last-child a {
+		display: block;
+		text-align: center;
+	}
+
+	.codeable .profile .sub-section:last-child a img {
+		width: 90%;
+	}
+
+	#codeableBadge {
+		width: 90% !important;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	.social-list .social-item-container {
+		width: 33.33333%;
+	}
+}
 
 
 
