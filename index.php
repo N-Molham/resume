@@ -225,6 +225,19 @@ if ( false === $more_than_enough && $file_output )
 
 		<div class="knowlage clearfix">
 			<div class="qualifies col">
+				<section class="sub-section education">
+					<h3 class="section-title">Australian Computer Society Inc. (ACT)</h3>
+
+					<article class="entry">
+						<h3 class="section-title"><a href="https://www.acs.org.au/msa/information-for-applicants.html">ICT Skills Assessment</a></h3>
+						<span class="entry-time">2017 - 2019</span>
+
+						<div class="entry-content">
+							<p>Assessed to be suitable for migration under 261212 (Web Developer) of the ANZSCO Code.</p>
+						</div><!-- .entry-content -->
+					</article><!-- .entry -->
+				</section><!-- .education -->
+
 				<section class="sub-section jobs">
 					<h3 class="section-title">Employment</h3>
 
