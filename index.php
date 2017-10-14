@@ -242,19 +242,19 @@ if ( false === $more_than_enough && $file_output )
 					<h3 class="section-title">Employment</h3>
 
 					<article class="entry">
+						<h3 class="section-title">WordPress Expert @
+							<a href="https://codeable.io/developers/nabeel-molham/" target="_blank">Codeable.io</a></h3>
+						<span class="entry-time">Dec 2015 : Present</span>
+					</article><!-- .entry -->
+
+					<article class="entry">
 						<h3 class="section-title">Contractor @
 							<a href="https://www.skyverge.com/" target="_blank">SkyVerge - Leading WooCommerce experts</a></h3>
-						<span class="entry-time">Mar 2017 : Present</span>
+						<span class="entry-time">Mar 2017 : Sep 2017</span>
 
 						<div class="entry-content">
 							<p>Maintaining, developing, and improving their line of well-known WooCommerce extension products.</p>
 						</div><!-- .entry-content -->
-					</article><!-- .entry -->
-
-					<article class="entry">
-						<h3 class="section-title">WordPress Expert @
-							<a href="https://codeable.io/developers/nabeel-molham/" target="_blank">Codeable.io</a></h3>
-						<span class="entry-time">Dec 2015 : Present</span>
 					</article><!-- .entry -->
 
 					<article class="entry">
