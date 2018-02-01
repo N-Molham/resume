@@ -226,7 +226,7 @@ if ( false === $more_than_enough && $file_output )
 		<div class="knowlage clearfix">
 			<div class="qualifies col">
 				<section class="sub-section education">
-					<h3 class="section-title">Australian Computer Society Inc. (ACT)</h3>
+					<h3 class="section-title">Australian Computer Society Inc. (ACS)</h3>
 
 					<article class="entry">
 						<h3 class="section-title"><a href="https://www.acs.org.au/msa/information-for-applicants.html">ICT Skills Assessment</a></h3>
@@ -242,14 +242,12 @@ if ( false === $more_than_enough && $file_output )
 					<h3 class="section-title">Employment</h3>
 
 					<article class="entry">
-						<h3 class="section-title">WordPress Expert @
-							<a href="https://codeable.io/developers/nabeel-molham/" target="_blank">Codeable.io</a></h3>
+						<h3 class="section-title">WordPress Expert @ <a href="https://codeable.io/developers/nabeel-molham/" target="_blank">Codeable.io</a></h3>
 						<span class="entry-time">Dec 2015 : Present</span>
 					</article><!-- .entry -->
 
 					<article class="entry">
-						<h3 class="section-title">Contractor @
-							<a href="https://www.skyverge.com/" target="_blank">SkyVerge - Leading WooCommerce experts</a></h3>
+						<h3 class="section-title">Contractor @ <a href="https://www.skyverge.com/" target="_blank">SkyVerge - Leading WooCommerce experts</a></h3>
 						<span class="entry-time">Mar 2017 : Sep 2017</span>
 
 						<div class="entry-content">
@@ -261,18 +259,16 @@ if ( false === $more_than_enough && $file_output )
 						<h3 class="section-title">Freelance Web Developer, WordPress Specialist</h3>
 
 						<div class="entry-content">
-							<p>WordPress development is the best thing I like to do, themes, plugins and deep
-								integrations, also working on other platforms and front-end development.</p>
+							<p>WordPress development is the best thing I like to do, themes, plugins and deep integrations, also working on other platforms and front-end development.</p>
 						</div><!-- .entry-content -->
 					</article><!-- .entry -->
 
 					<article class="entry">
-						<h3 class="section-title">Sr. Web Developer @ <a href="http://jobthemes.com" target="_blank">F-kar
-								Web Designs, Inc</a></h3>
+						<h3 class="section-title">Sr. Web Developer @ <a href="http://jobthemes.com" target="_blank">F-kar Web Designs, Inc</a></h3>
 						<span class="entry-time">Dec 2013 : Oct 2015</span>
 
 						<div class="entry-content">
-							<p>Working on contract basses.</p>
+							<p>Working on contract basis.</p>
 						</div>
 					</article><!-- .entry -->
 
@@ -281,9 +277,7 @@ if ( false === $more_than_enough && $file_output )
 						<span class="entry-time">Feb 2009 : Dec 2013</span>
 
 						<div class="entry-content">
-							<p>Working at <a href="http://eprisma.com" target="_blank">Eprisma</a> as a Senior at first
-								then a Development team leader, and I was incharge of company products and other web
-								projects development and mobile API integrations.</p>
+							<p>Working at Eprisma as a Senior at first then a Development team leader, and I was incharge of company products and other web projects development and mobile API integrations.</p>
 						</div><!-- .entry-content -->
 					</article><!-- .entry -->
 
@@ -291,8 +285,7 @@ if ( false === $more_than_enough && $file_output )
 						<h3 class="section-title">Freelance RIA Developer</h3>
 
 						<div class="entry-content">
-							<p>Rich Internet Application development with Adobe Flash, Adobe Flash Builder "was known as
-								Adobe Flex", ActionScript 3.0 and MXML.</p>
+							<p>Rich Internet Application development with Adobe Flash, Adobe Flash Builder "was known as Adobe Flex", ActionScript 3.0 and MXML.</p>
 						</div><!-- .entry-content -->
 					</article><!-- .entry -->
 				</section><!-- .jobs -->
@@ -399,7 +392,7 @@ if ( false === $more_than_enough && $file_output )
 					</article>
 
 					<article class="entry">
-						<h4 class="section-title">Laravel</h4>
+						<h4 class="section-title">Laravel Framework</h4>
 						<div class="bar">
 							<div class="percent" style="width:80%;"></div>
 						</div>
@@ -407,7 +400,7 @@ if ( false === $more_than_enough && $file_output )
 				</section>
 
 				<section class="sub-section">
-					<h3 class="section-title">Task Runner</h3>
+					<h3 class="section-title">Task Runners</h3>
 
 					<article class="entry">
 						<h4 class="section-title">Grunt</h4>
@@ -462,7 +455,7 @@ if ( false === $more_than_enough && $file_output )
 					<article class="entry">
 						<h4 class="section-title">Titanium SDK</h4>
 						<div class="bar">
-							<div class="percent" style="width:50%;"></div>
+							<div class="percent" style="width:40%;"></div>
 						</div>
 					</article>
 				</section>
