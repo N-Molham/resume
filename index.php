@@ -182,7 +182,7 @@ if ( false === $more_than_enough && $file_output )
 		<h2 class="section-title">About me</h2>
 
 		<p>My name is <strong>Nabeel Molham</strong>, a freelance web developer, WordPress Specialist. I worked with few
-			companies inside and outside Egypt, and I all started at the end of 2003 with Micromedia Flash 5.0 :D.</p>
+			companies inside and outside Egypt, and I all started at the end of 2003 with Macromedia Flash 5.0 :D.</p>
 
 		<?php $me_img = $path . '/images/avatar_new.jpg'; ?>
 		<div class="photo">
@@ -558,7 +558,7 @@ if ( $codeable_profile && $codeable_reviews )
 					</section>
 
 					<section class="sub-section">
-						<h3 class="section-title">Codebale Certificate</h3>
+						<h3 class="section-title">Codeable.io Certificate</h3>
 
 						<a href="https://nabeel.molham.me/blog/codeable-certificate/" target="_blank" title="Codebale Certificate">
 							<img src="https://nabeel.molham.me/blog/wp-content/uploads/2016/03/codeable-certificate-300x212.png" alt="Codebale Certificate" />
