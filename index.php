@@ -194,10 +194,6 @@ if ( false === $more_than_enough && $file_output )
 			<dd><strong>Nabeel Molham Rosdhy AdbElMalak</strong></dd>
 			<dd class="sep"></dd>
 
-			<dt>Born</dt>
-			<dd>1 March 1988</dd>
-			<dd class="sep"></dd>
-
 			<dt>Address</dt>
 			<dd><?php echo encode_string( 'Mansoura, Al-Dakahlia, Egypt.' ); ?></dd>
 			<dd class="sep"></dd>
