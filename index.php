@@ -202,6 +202,15 @@ if (false === $moreThanEnough && $fileOutput) {
                     <h3 class="section-title">Employment</h3>
 
                     <article class="entry">
+                        <h3 class="section-title">Software Engineer @ <a href="https://godaddy.com" target="_blank">GoDaddy</a></h3>
+                        <span class="entry-time">Sep 2020 : Present</span>
+
+                        <div class="entry-content">
+                            <p>As part of GoDaddy's Commerce solution.</p>
+                        </div><!-- .entry-content -->
+                    </article><!-- .entry -->
+
+                    <article class="entry">
                         <h3 class="section-title">WordPress Expert @ <a href="https://codeable.io/developers/nabeel-molham/" target="_blank">Codeable.io</a></h3>
                         <span class="entry-time">Dec 2015 : Present</span>
                     </article><!-- .entry -->
