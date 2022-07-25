@@ -141,7 +141,7 @@ if (false === $moreThanEnough && $fileOutput) {
     <div class="wrap">
         <h2 class="section-title">About me</h2>
 
-        <p>My name is <strong>Nabeel Abdelmalak</strong>, a freelance web developer, WordPress Specialist. I worked with few
+        <p>My name is <strong>Nabeel</strong>, a software development engineer, WordPress and Laravel Specialist. I worked with few
             companies inside and outside Egypt, and I all started at the end of 2003 with Macromedia Flash 5.0 :D.</p>
 
         <?php $me_img = $path.'/images/avatar_new.jpg'; ?>
@@ -462,19 +462,17 @@ if (false === $moreThanEnough && $fileOutput) {
             <dl>
                 <dt>Address:</dt>
                 <dd>
-                    <?php echo encodeString('No. 24'); ?><br/>
-                    <?php echo encodeString('EL-Tahreer St., El-Galaa St.,'); ?><br/>
-                    <?php echo encodeString('Mansoura, Al-Dakahlia, Egypt.'); ?>
+                    <?php echo encodeString('Melbourne, Victoria, Australia.'); ?>
                 </dd>
                 <dd class="sep"></dd>
 
                 <dt>Mobile:</dt>
-                <dd><?php echo encodeString('+201007221498'); ?></dd>
+                <dd><?php echo encodeString('+61413313520'); ?></dd>
                 <dd class="sep"></dd>
 
                 <dt>Email:</dt>
                 <dd>
-                    <a href="mailto:<?php echo encodeString('n.molham@gmail.com'); ?>"><?php echo encodeString('n.molham@gmail.com'); ?></a>
+                    <a href="mailto:<?php echo encodeString('nmolham@duck.com'); ?>"><?php echo encodeString('nmolham@duck.com'); ?></a>
                 </dd>
                 <dd class="sep"></dd>
 
