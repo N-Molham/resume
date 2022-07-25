@@ -38,7 +38,7 @@ if ($moreThanEnough || (false === $codeableRefresh && isset($_SESSION['codeable_
     $codeableProfile = $_SESSION['codeable_profile'];
 } else {
     // fetch fresh copy
-    $codeableProfile = json_decode(@file_get_contents($codeableUrl));
+    $codeableProfile = json_decode(@file_get_contents($codeableUrl), false);
     $_SESSION['codeable_profile'] = $codeableProfile;
 }
 
@@ -48,8 +48,8 @@ if ($moreThanEnough || (false === $codeableRefresh && isset($_SESSION['codeable_
 } else {
     // fetch fresh copy
     $codeableReviews = array_merge(
-        json_decode(@file_get_contents($codeableUrl.'/reviews')),
-        json_decode(@file_get_contents($codeableUrl.'/reviews?page=2'))
+        json_decode(@file_get_contents($codeableUrl.'/reviews'), false),
+        json_decode(@file_get_contents($codeableUrl.'/reviews?page=2'), false)
     );
     $_SESSION['codeable_reviews'] = $codeableReviews;
 }
