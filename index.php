@@ -8,8 +8,8 @@ if ('' === session_id()) {
 }
 
 // file output
-$fileOutput = 'file' === filter_input(INPUT_GET, 'output', FILTER_SANITIZE_STRING);
-$codeableRefresh = 'yes' === filter_input(INPUT_GET, 'refresh', FILTER_SANITIZE_STRING);
+$fileOutput = 'file' === filter_input(INPUT_GET, 'output');
+$codeableRefresh = 'yes' === filter_input(INPUT_GET, 'refresh');
 
 if (! isset($_SESSION['force_counter'])) {
     // prevent many refreshing processes
