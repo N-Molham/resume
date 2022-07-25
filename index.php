@@ -29,31 +29,6 @@ $path = __DIR__;
 // encoding cache
 $GLOBALS['encoding_cache'] = [];
 
-// codeable info
-$codeableId = '18791';
-$codeableUrl = 'https://api.codeable.io/users/'.$codeableId;
-
-if ($moreThanEnough || (false === $codeableRefresh && isset($_SESSION['codeable_profile']))) {
-    // load from cache
-    $codeableProfile = $_SESSION['codeable_profile'];
-} else {
-    // fetch fresh copy
-    $codeableProfile = json_decode(@file_get_contents($codeableUrl), false);
-    $_SESSION['codeable_profile'] = $codeableProfile;
-}
-
-if ($moreThanEnough || (false === $codeableRefresh && isset($_SESSION['codeable_reviews']))) {
-    // load from cache
-    $codeableReviews = $_SESSION['codeable_reviews'];
-} else {
-    // fetch fresh copy
-    $codeableReviews = array_merge(
-        json_decode(@file_get_contents($codeableUrl.'/reviews'), false),
-        json_decode(@file_get_contents($codeableUrl.'/reviews?page=2'), false)
-    );
-    $_SESSION['codeable_reviews'] = $codeableReviews;
-}
-
 /**
  * Encode passed string to ASCII code
  *
@@ -474,87 +449,6 @@ if (false === $moreThanEnough && $fileOutput) {
         </div><!-- .knowlage -->
     </div><!-- .wrap -->
 </section><!-- #work-experiences -->
-
-<?php
-if ($codeableProfile && $codeableReviews) {
-    ?>
-    <section id="codeable" class="codeable section" data-nav="true">
-        <div class="wrap">
-            <h2 class="section-title">Codeable.io</h2>
-
-            <div class="contact-section">
-                <div class="reviews col">
-                    <section class="sub-section">
-                        <h3 class="section-title">Latest <?php echo count($codeableReviews); ?> Reviews</h3>
-
-                        <ul class="codeable-reviews">
-                            <?php foreach ($codeableReviews as $review) : ?>
-                                <li class="project-review">
-                                    <img class="profile-pic" alt="" src="<?php echo $review->reviewer->avatar->medium_url; ?>">
-                                    <div class="review-info">
-                                        <div class="project-rating">
-                                            <span>Project rating:</span>
-                                            <p><?php echo str_repeat('<span class="rating-star"></span>', $review->score); ?></p>
-                                        </div>
-                                        <p class="project-title"><?php echo $review->task_title; ?></p>
-                                        <?php if ($review->comment): ?>
-                                            <p class="project-comment">"<?php echo $review->comment; ?>"</p>
-                                        <?php endif; ?>
-                                        <div>
-                                            <span class="client-name"><?php echo $review->reviewer->full_name; ?></span>,
-                                            <span class="review-datetime"><?php echo date('d M Y', $review->timestamp); ?></span>
-                                        </div>
-                                    </div>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    </section>
-                </div>
-
-                <div class="profile col">
-                    <section class="sub-section">
-                        <h3 class="section-title">Profile</h3>
-
-                        <p><strong><?php echo round((float) $codeableProfile->average_rating, 2); ?> / 5</strong>
-                            overall rating so far.</p>
-
-                        <div id="codeableBadge" style="display: none;">
-                            <div id="codeableBadgeInner">
-                                <div id="codeableBadgeProfile">
-                                    <p id="codeableBadgeButton">
-                                        <a id="codeableBadgeButtonLink" href="https://app.codeable.io/tasks/new?preferredContractor=<?php echo $codeableId ?>">POST
-                                            YOUR TASK</a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <script type="text/javascript" charset="utf-8">
-                            (function () {
-                                var po = document.createElement('script');
-                                po.type = 'text/javascript';
-                                po.async = true;
-                                po.id = 'codeableScript';
-                                po.src = 'https://s3-us-west-2.amazonaws.com/cdn.codeable.io/scripts/badges-v.js?id=<?php echo $codeableId?>';
-                                var s = document.getElementsByTagName('script')[0];
-                                s.parentNode.insertBefore(po, s);
-                            })();
-                        </script>
-                    </section>
-
-                    <section class="sub-section">
-                        <h3 class="section-title">Codeable.io Certificate</h3>
-
-                        <a href="https://nabeel.molham.me/blog/codeable-certificate/" target="_blank" title="Codebale Certificate">
-                            <img src="https://nabeel.molham.me/blog/wp-content/uploads/2016/03/codeable-certificate-300x212.png" alt="Codebale Certificate"/>
-                        </a>
-                    </section>
-                </div>
-            </div>
-        </div>
-    </section><!-- Codeable.io profile -->
-    <?php
-}
-?>
 
 <!-- Contacts & footer -->
 <footer id="contacts" class="section" data-nav="true">
