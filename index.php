@@ -8,17 +8,17 @@ if ('' === session_id()) {
 }
 
 // file output
-$file_output = 'file' === filter_input(INPUT_GET, 'output', FILTER_SANITIZE_STRING);
-$codeable_refresh = 'yes' === filter_input(INPUT_GET, 'refresh', FILTER_SANITIZE_STRING);
+$fileOutput = 'file' === filter_input(INPUT_GET, 'output', FILTER_SANITIZE_STRING);
+$codeableRefresh = 'yes' === filter_input(INPUT_GET, 'refresh', FILTER_SANITIZE_STRING);
 
 if (! isset($_SESSION['force_counter'])) {
     // prevent many refreshing processes
     $_SESSION['force_counter'] = 0;
 }
 
-$more_than_enough = $_SESSION['force_counter'] > 5;
+$moreThanEnough = $_SESSION['force_counter'] > 5;
 
-if (false === $more_than_enough && ($file_output || $codeable_refresh)) {
+if (false === $moreThanEnough && ($fileOutput || $codeableRefresh)) {
     // increase counter
     $_SESSION['force_counter']++;
 }
@@ -30,28 +30,28 @@ $path = __DIR__;
 $GLOBALS['encoding_cache'] = [];
 
 // codeable info
-$codeable_id = '18791';
-$codeable_url = 'https://api.codeable.io/users/'.$codeable_id;
+$codeableId = '18791';
+$codeableUrl = 'https://api.codeable.io/users/'.$codeableId;
 
-if ($more_than_enough || (false === $codeable_refresh && isset($_SESSION['codeable_profile']))) {
+if ($moreThanEnough || (false === $codeableRefresh && isset($_SESSION['codeable_profile']))) {
     // load from cache
-    $codeable_profile = $_SESSION['codeable_profile'];
+    $codeableProfile = $_SESSION['codeable_profile'];
 } else {
     // fetch fresh copy
-    $codeable_profile = json_decode(@file_get_contents($codeable_url));
-    $_SESSION['codeable_profile'] = $codeable_profile;
+    $codeableProfile = json_decode(@file_get_contents($codeableUrl));
+    $_SESSION['codeable_profile'] = $codeableProfile;
 }
 
-if ($more_than_enough || (false === $codeable_refresh && isset($_SESSION['codeable_reviews']))) {
+if ($moreThanEnough || (false === $codeableRefresh && isset($_SESSION['codeable_reviews']))) {
     // load from cache
-    $codeable_reviews = $_SESSION['codeable_reviews'];
+    $codeableReviews = $_SESSION['codeable_reviews'];
 } else {
     // fetch fresh copy
-    $codeable_reviews = array_merge(
-        json_decode(@file_get_contents($codeable_url.'/reviews')),
-        json_decode(@file_get_contents($codeable_url.'/reviews?page=2'))
+    $codeableReviews = array_merge(
+        json_decode(@file_get_contents($codeableUrl.'/reviews')),
+        json_decode(@file_get_contents($codeableUrl.'/reviews?page=2'))
     );
-    $_SESSION['codeable_reviews'] = $codeable_reviews;
+    $_SESSION['codeable_reviews'] = $codeableReviews;
 }
 
 /**
@@ -61,7 +61,7 @@ if ($more_than_enough || (false === $codeable_refresh && isset($_SESSION['codeab
  *
  * @return string
  */
-function encode_string($string)
+function encodeString(string $string) : string
 {
     $encoded = '';
     $hash_key = md5($string);
@@ -86,7 +86,7 @@ function encode_string($string)
  *
  * @return string
  */
-function minify_css($style)
+function minifyCss(string $style) : string
 {
     // Strips Comments
     $style = preg_replace('!/\*.*?\*/!s', '', $style);
@@ -107,7 +107,7 @@ function minify_css($style)
  *
  * @return string
  */
-function minify_js($code)
+function minifyJs(string $code) : string
 {
     // remove white spaces
     $code = preg_replace('/((?<!\/)\/\*[\s\S]*?\*\/|(?<!\:)\/\/(.*))/', '', $code);
@@ -117,7 +117,7 @@ function minify_js($code)
 }
 
 // start output cache
-if (false === $more_than_enough && $file_output) {
+if (false === $moreThanEnough && $fileOutput) {
     // set headers
     header('Content-Encoding: gzip');
 
@@ -130,7 +130,7 @@ if (false === $more_than_enough && $file_output) {
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <title>Nabeel Molham Rosdhy Resume</title>
+    <title>Nabeel Abdelmalak Resume</title>
     <?php
     // CSS Style
 
@@ -142,20 +142,17 @@ if (false === $more_than_enough && $file_output) {
     ?>
 
     <!-- Fonts + Main Style -->
-    <style type="text/css"><?php echo minify_css($style); ?></style>
+    <style type="text/css"><?php echo minifyCss($style); ?></style>
 
     <!-- Print View -->
-    <style rel="stylesheet" type="text/css" media="print"><?php echo minify_css(file_get_contents($path.'/css/print.css')); ?></style>
-
-    <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>    <![endif]-->
+    <style rel="stylesheet" type="text/css" media="print"><?php echo minifyCss(file_get_contents($path.'/css/print.css')); ?></style>
 </head>
 <body>
 
 <!-- Main Header -->
 <header id="header">
     <div class="wrap">
-        <h1 class="main-head">Nabeel Molham</h1>
+        <h1 class="main-head">Nabeel Abdelmalak</h1>
 
         <nav class="sections-nav">
             <h2 class="nav-title">Navigation</h2>
@@ -169,7 +166,7 @@ if (false === $more_than_enough && $file_output) {
     <div class="wrap">
         <h2 class="section-title">About me</h2>
 
-        <p>My name is <strong>Nabeel Molham</strong>, a freelance web developer, WordPress Specialist. I worked with few
+        <p>My name is <strong>Nabeel Abdelmalak</strong>, a freelance web developer, WordPress Specialist. I worked with few
             companies inside and outside Egypt, and I all started at the end of 2003 with Macromedia Flash 5.0 :D.</p>
 
         <?php $me_img = $path.'/images/avatar_new.jpg'; ?>
@@ -179,7 +176,7 @@ if (false === $more_than_enough && $file_output) {
 
         <dl class="basic-info">
             <dt>Name</dt>
-            <dd><strong>Nabeel Molham Rosdhy AdbElMalak</strong></dd>
+            <dd><strong>Nabeel Abdelmalak</strong></dd>
             <dd class="sep"></dd>
 
             <dt>Born</dt>
@@ -187,11 +184,11 @@ if (false === $more_than_enough && $file_output) {
             <dd class="sep"></dd>
 
             <dt>Address</dt>
-            <dd><?php echo encode_string('Mansoura, Al-Dakahlia, Egypt.'); ?></dd>
+            <dd><?php echo encodeString('Melbourne, Australia.'); ?></dd>
             <dd class="sep"></dd>
 
             <dt>Email</dt>
-            <dd><?php echo encode_string('n.molham@gmail.com'); ?></dd>
+            <dd><?php echo encodeString('nmolham@duck.com'); ?></dd>
             <dd class="sep"></dd>
 
             <dt>Website</dt>
@@ -199,7 +196,7 @@ if (false === $more_than_enough && $file_output) {
             <dd class="sep"></dd>
 
             <dt>Mobile</dt>
-            <dd><?php echo encode_string('+201007221498'); ?></dd>
+            <dd><?php echo encodeString('+61413313520'); ?></dd>
             <dd class="sep"></dd>
 
         </dl><!-- .basic-info -->
@@ -252,7 +249,7 @@ if (false === $more_than_enough && $file_output) {
                     </article><!-- .entry -->
 
                     <article class="entry">
-                        <h3 class="section-title">Sr. Web Developer @ <a href="http://jobthemes.com" target="_blank">F-kar Web Designs, Inc</a></h3>
+                        <h3 class="section-title">Sr. Web Developer @ <a href="https://jobthemes.com" target="_blank">F-kar Web Designs, Inc</a></h3>
                         <span class="entry-time">Dec 2013 : Oct 2015</span>
 
                         <div class="entry-content">
@@ -479,7 +476,7 @@ if (false === $more_than_enough && $file_output) {
 </section><!-- #work-experiences -->
 
 <?php
-if ($codeable_profile && $codeable_reviews) {
+if ($codeableProfile && $codeableReviews) {
     ?>
     <section id="codeable" class="codeable section" data-nav="true">
         <div class="wrap">
@@ -488,10 +485,10 @@ if ($codeable_profile && $codeable_reviews) {
             <div class="contact-section">
                 <div class="reviews col">
                     <section class="sub-section">
-                        <h3 class="section-title">Latest <?php echo count($codeable_reviews); ?> Reviews</h3>
+                        <h3 class="section-title">Latest <?php echo count($codeableReviews); ?> Reviews</h3>
 
                         <ul class="codeable-reviews">
-                            <?php foreach ($codeable_reviews as $review) : ?>
+                            <?php foreach ($codeableReviews as $review) : ?>
                                 <li class="project-review">
                                     <img class="profile-pic" alt="" src="<?php echo $review->reviewer->avatar->medium_url; ?>">
                                     <div class="review-info">
@@ -518,14 +515,14 @@ if ($codeable_profile && $codeable_reviews) {
                     <section class="sub-section">
                         <h3 class="section-title">Profile</h3>
 
-                        <p><strong><?php echo round((float) $codeable_profile->average_rating, 2); ?> / 5</strong>
+                        <p><strong><?php echo round((float) $codeableProfile->average_rating, 2); ?> / 5</strong>
                             overall rating so far.</p>
 
                         <div id="codeableBadge" style="display: none;">
                             <div id="codeableBadgeInner">
                                 <div id="codeableBadgeProfile">
                                     <p id="codeableBadgeButton">
-                                        <a id="codeableBadgeButtonLink" href="https://app.codeable.io/tasks/new?preferredContractor=<?php echo $codeable_id ?>">POST
+                                        <a id="codeableBadgeButtonLink" href="https://app.codeable.io/tasks/new?preferredContractor=<?php echo $codeableId ?>">POST
                                             YOUR TASK</a>
                                     </p>
                                 </div>
@@ -537,7 +534,7 @@ if ($codeable_profile && $codeable_reviews) {
                                 po.type = 'text/javascript';
                                 po.async = true;
                                 po.id = 'codeableScript';
-                                po.src = 'https://s3-us-west-2.amazonaws.com/cdn.codeable.io/scripts/badges-v.js?id=<?php echo $codeable_id?>';
+                                po.src = 'https://s3-us-west-2.amazonaws.com/cdn.codeable.io/scripts/badges-v.js?id=<?php echo $codeableId?>';
                                 var s = document.getElementsByTagName('script')[0];
                                 s.parentNode.insertBefore(po, s);
                             })();
@@ -571,19 +568,19 @@ if ($codeable_profile && $codeable_reviews) {
             <dl>
                 <dt>Address:</dt>
                 <dd>
-                    <?php echo encode_string('No. 24'); ?><br/>
-                    <?php echo encode_string('EL-Tahreer St., El-Galaa St.,'); ?><br/>
-                    <?php echo encode_string('Mansoura, Al-Dakahlia, Egypt.'); ?>
+                    <?php echo encodeString('No. 24'); ?><br/>
+                    <?php echo encodeString('EL-Tahreer St., El-Galaa St.,'); ?><br/>
+                    <?php echo encodeString('Mansoura, Al-Dakahlia, Egypt.'); ?>
                 </dd>
                 <dd class="sep"></dd>
 
                 <dt>Mobile:</dt>
-                <dd><?php echo encode_string('+201007221498'); ?></dd>
+                <dd><?php echo encodeString('+201007221498'); ?></dd>
                 <dd class="sep"></dd>
 
                 <dt>Email:</dt>
                 <dd>
-                    <a href="mailto:<?php echo encode_string('n.molham@gmail.com'); ?>"><?php echo encode_string('n.molham@gmail.com'); ?></a>
+                    <a href="mailto:<?php echo encodeString('n.molham@gmail.com'); ?>"><?php echo encodeString('n.molham@gmail.com'); ?></a>
                 </dd>
                 <dd class="sep"></dd>
 
@@ -597,57 +594,51 @@ if ($codeable_profile && $codeable_reviews) {
         <div class="contact-section contact-social">
             <h3 class="section-title">Social</h3>
             <?php
-            $social_links = [
-                'github'     => [
+            $socialLinks = [
+                'github'   => [
                     'label'    => 'Github',
                     'username' => 'N-Molham',
-                    'link'     => 'http://github.com/N-Molham',
+                    'link'     => 'https://github.com/N-Molham',
                     'icons'    => ['#shape-github'],
                 ],
-                'googleplus' => [
-                    'label'    => 'Google+',
-                    'username' => 'NabeelMolham',
-                    'link'     => 'http://plus.google.com/+NabeelMolham',
-                    'icons'    => ['#shape-googleplus'],
-                ],
-                'twitter'    => [
+                'twitter'  => [
                     'label'    => 'Twitter',
                     'username' => '@NabeelMolham',
-                    'link'     => 'http://twitter.com/NabeelMolham',
+                    'link'     => 'https://twitter.com/NabeelMolham',
                     'icons'    => ['#shape-twitter'],
                 ],
-                'facebook'   => [
+                'facebook' => [
                     'label'    => 'Facebook',
                     'username' => 'nabeel.molham',
-                    'link'     => 'http://facebook.com/nabeel.molham',
+                    'link'     => 'https://facebook.com/nabeel.molham',
                     'icons'    => ['#shape-facebook'],
                 ],
-                'youtube'    => [
+                'youtube'  => [
                     'label'    => 'YouTube',
                     'username' => 'nabeelmolham',
-                    'link'     => 'http://www.youtube.com/user/nabeelmolham',
+                    'link'     => 'https://www.youtube.com/user/nabeelmolham',
                     'icons'    => ['#shape-youtube'],
                 ],
-                'codepen'    => [
+                'codepen'  => [
                     'label'    => 'CodePen',
                     'username' => 'NabeelMolham',
-                    'link'     => 'http://codepen.io/NabeelMolham/',
+                    'link'     => 'https://codepen.io/NabeelMolham/',
                     'icons'    => ['#shape-codepen'],
                 ],
             ];
             ?>
             <ul class="social-list">
-                <?php foreach ($social_links as $social_name => $social_info) : ?>
+                <?php foreach ($socialLinks as $socialName => $socialInfo) : ?>
                     <li class="social-item-container">
                         <div class="social-item">
-                            <a href="<?php echo $social_info['link']; ?>" class="social-<?php echo $social_name; ?>" target="_blank">
-                                <?php foreach ($social_info['icons'] as $icon_selector) : ?>
-                                    <svg viewBox="0 0 100 100" class="shape-<?php echo $social_name; ?>">
+                            <a href="<?php echo $socialInfo['link']; ?>" class="social-<?php echo $socialName; ?>" target="_blank">
+                                <?php foreach ($socialInfo['icons'] as $icon_selector) : ?>
+                                    <svg viewBox="0 0 100 100" class="shape-<?php echo $socialName; ?>">
                                         <use xlink:href="<?php echo $icon_selector; ?>"></use>
                                     </svg>
                                 <?php endforeach; ?>
-                                <span><?php echo $social_info['label']; ?>
-									<span><?php echo $social_info['username']; ?></span></span> </a>
+                                <span><?php echo $socialInfo['label']; ?>
+									<span><?php echo $socialInfo['username']; ?></span></span> </a>
                         </div>
                     </li>
                 <?php endforeach; ?>
@@ -659,7 +650,7 @@ if ($codeable_profile && $codeable_reviews) {
         <div class="footer clearfix">
             <p class="final">Hope you like it &#8730;</p>
 
-            <a href="http://github.com/N-Molham/resume" class="top" target="_blank">Github</a>
+            <a href="https://github.com/N-Molham/resume" class="top" target="_blank">Github</a>
         </div><!-- .footer -->
     </div><!-- .wrap -->
 </footer><!-- #contacts -->
@@ -763,20 +754,20 @@ if ($codeable_profile && $codeable_reviews) {
 <!-- Scripts -->
 <?php
 // jQuery lib
-$scripts = file_get_contents('http://code.jquery.com/jquery.min.js');
+$scripts = file_get_contents('https://code.jquery.com/jquery.min.js');
 
 // scrollspy
 $scripts .= "\n".file_get_contents($path.'/js/scrollspy.min.js');
 
 // resume js
-$scripts .= "\n".minify_js(file_get_contents($path.'/js/script.js'));
+$scripts .= "\n".minifyJs(file_get_contents($path.'/js/script.js'));
 ?>
 <script><?php echo $scripts; ?></script>
 </body>
 </html>
 <?php
 // output flush
-if ($file_output) {
+if ($fileOutput) {
     // get flush & clean/clear
     $content = ob_get_clean();
 
