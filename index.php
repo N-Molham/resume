@@ -9,7 +9,6 @@ if ('' === session_id()) {
 
 // file output
 $fileOutput = 'file' === filter_input(INPUT_GET, 'output');
-$codeableRefresh = 'yes' === filter_input(INPUT_GET, 'refresh');
 
 if (! isset($_SESSION['force_counter'])) {
     // prevent many refreshing processes
@@ -18,7 +17,7 @@ if (! isset($_SESSION['force_counter'])) {
 
 $moreThanEnough = $_SESSION['force_counter'] > 5;
 
-if (false === $moreThanEnough && ($fileOutput || $codeableRefresh)) {
+if (false === $moreThanEnough && $fileOutput) {
     // increase counter
     $_SESSION['force_counter']++;
 }
@@ -110,17 +109,17 @@ if (false === $moreThanEnough && $fileOutput) {
     // CSS Style
 
     // fonts
-    $style = file_get_contents('http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600,700');
+    $style = file_get_contents('https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600,700');
 
     // style
     $style .= file_get_contents($path.'/css/resume.css');
     ?>
 
     <!-- Fonts + Main Style -->
-    <style type="text/css"><?php echo minifyCss($style); ?></style>
+    <style><?php echo minifyCss($style); ?></style>
 
     <!-- Print View -->
-    <style rel="stylesheet" type="text/css" media="print"><?php echo minifyCss(file_get_contents($path.'/css/print.css')); ?></style>
+    <style rel="stylesheet" media="print"><?php echo minifyCss(file_get_contents($path.'/css/print.css')); ?></style>
 </head>
 <body>
 
@@ -167,7 +166,7 @@ if (false === $moreThanEnough && $fileOutput) {
             <dd class="sep"></dd>
 
             <dt>Website</dt>
-            <dd><a href="http://nabeel.molham.me/" target="_blank">nabeel.molham.me</a></dd>
+            <dd><a href="https://nabeel.molham.me/" target="_blank">nabeel.molham.me</a></dd>
             <dd class="sep"></dd>
 
             <dt>Mobile</dt>
@@ -486,7 +485,7 @@ if (false === $moreThanEnough && $fileOutput) {
                 <dd class="sep"></dd>
 
                 <dt>C.V.:</dt>
-                <dd><a href="http://nabeel.molham.me/resume/index.html" download="resume.html">Download Resume</a></dd>
+                <dd><a href="https://nabeel.molham.me/resume/index.html" download="resume.html">Download Resume</a></dd>
                 <dd class="sep"></dd>
             </dl>
 
