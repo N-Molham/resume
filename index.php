@@ -69,9 +69,8 @@ function minifyCss(string $style) : string
     // Minifies
     $style = preg_replace('/[\n\r \t]/', ' ', $style);
     $style = preg_replace('/ +/', ' ', $style);
-    $style = preg_replace('/ ?([,:;{}]) ?/', '$1', $style);
 
-    return $style;
+    return preg_replace('/ ?([,:;{}]) ?/', '$1', $style);
 }
 
 /**
@@ -85,9 +84,8 @@ function minifyJs(string $code) : string
 {
     // remove white spaces
     $code = preg_replace('/((?<!\/)\/\*[\s\S]*?\*\/|(?<!\:)\/\/(.*))/', '', $code);
-    $code = preg_replace("/\n|\r|\t/", "", $code);
 
-    return $code;
+    return preg_replace("/[\n\r\t]/", "", $code);
 }
 
 // start output cache
@@ -100,7 +98,7 @@ if (false === $moreThanEnough && $fileOutput) {
 }
 
 ?><!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">

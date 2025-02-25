@@ -221,3 +221,5 @@ pip-log.txt
 /send.php
 
 .idea/
+
+vendor
