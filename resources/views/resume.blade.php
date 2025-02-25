@@ -1,100 +1,15 @@
-﻿<?php
-require_once "vendor/autoload.php";
-
-use MatthiasMullie\Minify\CSS;
-use MatthiasMullie\Minify\JS;
-
-// file output
-$fileOutput = 'file' === filter_input(INPUT_GET, 'output');
-
-if (! isset($_SESSION['force_counter'])) {
-    // prevent many refreshing processes
-    $_SESSION['force_counter'] = 0;
-}
-
-$moreThanEnough = $_SESSION['force_counter'] > 5;
-
-if (false === $moreThanEnough && $fileOutput) {
-    // increase counter
-    $_SESSION['force_counter']++;
-}
-
-// file location absolute path
-$rootPath = __DIR__;
-
-// encoding cache
-$GLOBALS['encoding_cache'] = [];
-
-/**
- * Encode passed string to ASCII code
- *
- * @param string $string
- *
- * @return string
- */
-function encodeString(string $string) : string
-{
-    $encoded = '';
-    $hash_key = md5($string);
-    if (isset($GLOBALS['encoding_cache'][$hash_key])) {
-        return $GLOBALS['encoding_cache'][$hash_key];
-    }
-
-    for ($i = 0, $len = strlen($string); $i < $len; $i++) {
-        $encoded .= "&#".ord($string[$i]).';';
-    }
-
-    // cache & return
-    $GLOBALS['encoding_cache'][$hash_key] = $encoded;
-
-    return $encoded;
-}
-
-/**
- * Minify CSS
- */
-function minifyCss(string ...$files) : string
-{
-    global $rootPath;
-
-    $files = array_map(static fn ($file) => $rootPath.'/css/'.$file, $files);
-
-    return (new CSS(...$files))->minify();
-}
-
-/**
- * Minify Javascript
- */
-function minifyJs(string ...$files) : string
-{
-    global $rootPath;
-
-    $files = array_map(static fn ($file) => $rootPath.'/js/'.$file, $files);
-
-    return (new JS(...$files))->minify();
-}
-
-// start output cache
-if (false === $moreThanEnough && $fileOutput) {
-    // set headers
-    header('Content-Encoding: gzip');
-
-    // start buffering
-    ob_start('ob_gzhandler');
-}
-
-?><!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <title>Nabeel Abdelmalak Resume</title>
 
     <!-- Fonts + Main Style -->
-    <style><?php echo minifyCss('fonts.css', 'resume.css'); ?></style>
+    <style><?php echo $minifyCss('fonts.css', 'resume.css'); ?></style>
 
     <!-- Print View -->
-    <style rel="stylesheet" media="print"><?php echo minifyCss('print.css'); ?></style>
+    <style rel="stylesheet" media="print"><?php echo $minifyCss('print.css'); ?></style>
 </head>
 <body>
 
@@ -118,7 +33,7 @@ if (false === $moreThanEnough && $fileOutput) {
         <p>My name is <strong>Nabeel</strong>, a software development engineer, WordPress and Laravel Specialist. I worked with few
             companies inside and outside Egypt, and I all started at the end of 2003 with Macromedia Flash 5.0 :D.</p>
 
-        <?php $me_img = $rootPath.'/images/avatar_new.jpg'; ?>
+        <?php $me_img = resource_path('/images/avatar_new.jpg'); ?>
         <div class="photo">
             <img src="data:<?php echo mime_content_type($me_img), ';base64,', base64_encode(file_get_contents($me_img)); ?>" alt="" class="image"/>
         </div>
@@ -133,11 +48,11 @@ if (false === $moreThanEnough && $fileOutput) {
             <dd class="sep"></dd>
 
             <dt>Address</dt>
-            <dd><?php echo encodeString('Melbourne, Australia.'); ?></dd>
+            <dd><?php echo $encodeString('Melbourne, Australia.'); ?></dd>
             <dd class="sep"></dd>
 
             <dt>Email</dt>
-            <dd><?php echo encodeString('nmolham@duck.com'); ?></dd>
+            <dd><?php echo $encodeString('nmolham@duck.com'); ?></dd>
             <dd class="sep"></dd>
 
             <dt>Website</dt>
@@ -145,7 +60,7 @@ if (false === $moreThanEnough && $fileOutput) {
             <dd class="sep"></dd>
 
             <dt>Mobile</dt>
-            <dd><?php echo encodeString('+61413313520'); ?></dd>
+            <dd><?php echo $encodeString('+61413313520'); ?></dd>
             <dd class="sep"></dd>
 
         </dl><!-- .basic-info -->
@@ -445,17 +360,17 @@ if (false === $moreThanEnough && $fileOutput) {
             <dl>
                 <dt>Address:</dt>
                 <dd>
-                    <?php echo encodeString('Melbourne, Victoria, Australia.'); ?>
+                    <?php echo $encodeString('Melbourne, Victoria, Australia.'); ?>
                 </dd>
                 <dd class="sep"></dd>
 
                 <dt>Mobile:</dt>
-                <dd><?php echo encodeString('+61413313520'); ?></dd>
+                <dd><?php echo $encodeString('+61413313520'); ?></dd>
                 <dd class="sep"></dd>
 
                 <dt>Email:</dt>
                 <dd>
-                    <a href="mailto:<?php echo encodeString('nmolham@duck.com'); ?>"><?php echo encodeString('nmolham@duck.com'); ?></a>
+                    <a href="mailto:<?php echo $encodeString('nmolham@duck.com'); ?>"><?php echo $encodeString('nmolham@duck.com'); ?></a>
                 </dd>
                 <dd class="sep"></dd>
 
@@ -504,18 +419,18 @@ if (false === $moreThanEnough && $fileOutput) {
             ?>
             <ul class="social-list">
                 <?php foreach ($socialLinks as $socialName => $socialInfo) : ?>
-                    <li class="social-item-container">
-                        <div class="social-item">
-                            <a href="<?php echo $socialInfo['link']; ?>" class="social-<?php echo $socialName; ?>" target="_blank">
+                <li class="social-item-container">
+                    <div class="social-item">
+                        <a href="<?php echo $socialInfo['link']; ?>" class="social-<?php echo $socialName; ?>" target="_blank">
                                 <?php foreach ($socialInfo['icons'] as $icon_selector) : ?>
-                                    <svg viewBox="0 0 100 100" class="shape-<?php echo $socialName; ?>">
-                                        <use xlink:href="<?php echo $icon_selector; ?>"></use>
-                                    </svg>
-                                <?php endforeach; ?>
-                                <span><?php echo $socialInfo['label']; ?>
+                            <svg viewBox="0 0 100 100" class="shape-<?php echo $socialName; ?>">
+                                <use xlink:href="<?php echo $icon_selector; ?>"></use>
+                            </svg>
+                            <?php endforeach; ?>
+                            <span><?php echo $socialInfo['label']; ?>
 									<span><?php echo $socialInfo['username']; ?></span></span> </a>
-                        </div>
-                    </li>
+                    </div>
+                </li>
                 <?php endforeach; ?>
             </ul><!-- .social -->
         </div><!-- .contact-social -->
@@ -627,19 +542,6 @@ if (false === $moreThanEnough && $fileOutput) {
 </svg><!-- .social-drawing -->
 
 <!-- Scripts -->
-<script><?php echo minifyJs('jquery-3.7.1.js', 'scrollspy.min.js', 'script.js'); ?></script>
+<script><?php echo $minifyJs('jquery-3.7.1.js', 'scrollspy.min.js', 'script.js'); ?></script>
 </body>
 </html>
-<?php
-// output flush
-if ($fileOutput) {
-    // get flush & clean/clear
-    $content = ob_get_clean();
-
-    // save content
-    file_put_contents('index.html', $content);
-
-    // redirect to result file
-    header('location: index.html');
-    die();
-}
