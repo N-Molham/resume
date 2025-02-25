@@ -627,7 +627,7 @@ if (false === $moreThanEnough && $fileOutput) {
 </svg><!-- .social-drawing -->
 
 <!-- Scripts -->
-<script><?php echo minifyJs('jquery-3.7.1.slim.js', 'scrollspy.min.js', 'script.js'); ?></script>
+<script><?php echo minifyJs('jquery-3.7.1.js', 'scrollspy.min.js', 'script.js'); ?></script>
 </body>
 </html>
 <?php
