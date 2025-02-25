@@ -1,11 +1,8 @@
 ﻿<?php
-/**
- * Index page
- */
-if ('' === session_id()) {
-    // start session if not already started
-    session_start();
-}
+require_once "vendor/autoload.php";
+
+use MatthiasMullie\Minify\CSS;
+use MatthiasMullie\Minify\JS;
 
 // file output
 $fileOutput = 'file' === filter_input(INPUT_GET, 'output');
@@ -23,7 +20,7 @@ if (false === $moreThanEnough && $fileOutput) {
 }
 
 // file location absolute path
-$path = __DIR__;
+$rootPath = __DIR__;
 
 // encoding cache
 $GLOBALS['encoding_cache'] = [];
@@ -55,37 +52,26 @@ function encodeString(string $string) : string
 
 /**
  * Minify CSS
- *
- * @param string $style
- *
- * @return string
  */
-function minifyCss(string $style) : string
+function minifyCss(string ...$files) : string
 {
-    // Strips Comments
-    $style = preg_replace('!/\*.*?\*/!s', '', $style);
-    $style = preg_replace('/\n\s*\n/', "\n", $style);
+    global $rootPath;
 
-    // Minifies
-    $style = preg_replace('/[\n\r \t]/', ' ', $style);
-    $style = preg_replace('/ +/', ' ', $style);
+    $files = array_map(static fn ($file) => $rootPath.'/css/'.$file, $files);
 
-    return preg_replace('/ ?([,:;{}]) ?/', '$1', $style);
+    return (new CSS(...$files))->minify();
 }
 
 /**
  * Minify Javascript
- *
- * @param string $code
- *
- * @return string
  */
-function minifyJs(string $code) : string
+function minifyJs(string ...$files) : string
 {
-    // remove white spaces
-    $code = preg_replace('/((?<!\/)\/\*[\s\S]*?\*\/|(?<!\:)\/\/(.*))/', '', $code);
+    global $rootPath;
 
-    return preg_replace("/[\n\r\t]/", "", $code);
+    $files = array_map(static fn ($file) => $rootPath.'/js/'.$file, $files);
+
+    return (new JS(...$files))->minify();
 }
 
 // start output cache
@@ -103,21 +89,12 @@ if (false === $moreThanEnough && $fileOutput) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <title>Nabeel Abdelmalak Resume</title>
-    <?php
-    // CSS Style
-
-    // fonts
-    $style = file_get_contents('https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600,700');
-
-    // style
-    $style .= file_get_contents($path.'/css/resume.css');
-    ?>
 
     <!-- Fonts + Main Style -->
-    <style><?php echo minifyCss($style); ?></style>
+    <style><?php echo minifyCss('fonts.css', 'resume.css'); ?></style>
 
     <!-- Print View -->
-    <style rel="stylesheet" media="print"><?php echo minifyCss(file_get_contents($path.'/css/print.css')); ?></style>
+    <style rel="stylesheet" media="print"><?php echo minifyCss('print.css'); ?></style>
 </head>
 <body>
 
@@ -141,7 +118,7 @@ if (false === $moreThanEnough && $fileOutput) {
         <p>My name is <strong>Nabeel</strong>, a software development engineer, WordPress and Laravel Specialist. I worked with few
             companies inside and outside Egypt, and I all started at the end of 2003 with Macromedia Flash 5.0 :D.</p>
 
-        <?php $me_img = $path.'/images/avatar_new.jpg'; ?>
+        <?php $me_img = $rootPath.'/images/avatar_new.jpg'; ?>
         <div class="photo">
             <img src="data:<?php echo mime_content_type($me_img), ';base64,', base64_encode(file_get_contents($me_img)); ?>" alt="" class="image"/>
         </div>
@@ -650,17 +627,7 @@ if (false === $moreThanEnough && $fileOutput) {
 </svg><!-- .social-drawing -->
 
 <!-- Scripts -->
-<?php
-// jQuery lib
-$scripts = file_get_contents('https://code.jquery.com/jquery.min.js');
-
-// scrollspy
-$scripts .= "\n".file_get_contents($path.'/js/scrollspy.min.js');
-
-// resume js
-$scripts .= "\n".minifyJs(file_get_contents($path.'/js/script.js'));
-?>
-<script><?php echo $scripts; ?></script>
+<script><?php echo minifyJs('jquery-3.7.1.slim.js', 'scrollspy.min.js', 'script.js'); ?></script>
 </body>
 </html>
 <?php

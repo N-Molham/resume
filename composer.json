@@ -11,6 +11,7 @@
   ],
   "require": {
     "php": "^8.2",
-    "ext-fileinfo": "*"
+    "ext-fileinfo": "*",
+    "matthiasmullie/minify": "^1.3"
   }
 }
